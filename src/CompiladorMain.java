@@ -30,7 +30,7 @@ import java.io.*;
             /*expected*/{"502","expected"},
         };//errores
                 
-        String nombreArchivo = "E:\\Documents\\NetBeansProjects\\compita\\src\\prueba.tri";
+        String nombreArchivo = "E:\\Documents\\NetBeansProjects\\Compilador\\src\\prueba.tri";
         
         int caracter;
         int col;
