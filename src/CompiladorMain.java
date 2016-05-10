@@ -1,10 +1,9 @@
-
 import java.io.FileReader;
 import static java.lang.Character.isDigit;
 import static java.lang.Character.isLetter;
 import java.io.*;
 
- class pruebota {
+ class pruebota{
 
     public static void main(String[] args){
         
@@ -32,6 +31,7 @@ import java.io.*;
                 
         String nombreArchivo = "E:\\Documents\\NetBeansProjects\\Compilador\\src\\prueba.tri";
         
+                
         int caracter;
         int col;
         String lexema ="";
@@ -43,7 +43,7 @@ import java.io.*;
         	lecturaenbufer = new BufferedReader(lecturaarchivo);
          while ((caracter = lecturaenbufer.read()) != -1/*end of file*/) {
              lexema = lexema + (char)caracter;
-             System.out.println(lexema);
+           //  System.out.println(lexema);
              //System.out.println((char)caracter);
 			  if(isLetter(caracter)){
 			  	col = 0;
@@ -129,3 +129,4 @@ public static void reservedwords(){
 }//class
 
 /*this is only a test a good one!*/
+/*Otra prueba */
