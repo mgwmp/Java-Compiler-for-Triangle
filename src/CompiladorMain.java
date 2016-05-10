@@ -43,7 +43,7 @@ import java.io.*;
         	lecturaenbufer = new BufferedReader(lecturaarchivo);
          while ((caracter = lecturaenbufer.read()) != -1/*end of file*/) {
              lexema = lexema + (char)caracter;
-           //  System.out.println(lexema);
+           System.out.println(lexema);
              //System.out.println((char)caracter);
 			  if(isLetter(caracter)){
 			  	col = 0;
@@ -89,8 +89,9 @@ import java.io.*;
                                                 break;*/
                                                /* case "''": col = 17;
                                                 break;*/
-                                              /*  case 'eb': col = 18;
-                                                break; */
+                                                case ' ': 
+                                                col = 18;
+                                                break; 
                                                 default:
                                                     col = 0;
                                                 break;
