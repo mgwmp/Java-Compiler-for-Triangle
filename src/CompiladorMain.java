@@ -51,15 +51,18 @@ import java.io.*;
 			  	if(isDigit(caracter)){
 			  		col = 1;
 			  	}else{
-
 			  		switch(caracter){
-			  			case '+': col = 2;
+			  			case '+':
+                                                    col = 2;
                                                 break;
-                                                case '-': col = 3;
+                                                case '-': 
+                                                    col = 3;
                                                 break;
-                                                case '*': col = 4;
+                                                case '*': 
+                                                    col = 4;
                                                 break;
-                                                case '/': col = 5;
+                                                case '/':
+                                                    col = 5;
                                                 break;
                                              /*   case '\ ': col = 6;
                                                 break;*/
@@ -81,13 +84,19 @@ import java.io.*;
                                                 break;
                                                 case ')': col = 15;
                                                 break;
-                                              /*  case '""': col = 16;
+                                               /* case '""': 
+                                                col = 16;
                                                 break;*/
                                                /* case "''": col = 17;
                                                 break;*/
                                               /*  case 'eb': col = 18;
                                                 break; */
-			  		}			  	}
+                                                default:
+                                                    col = 0;
+                                                break;
+			  		}//else
+                                }//caracter
+                                
 			  }
          }//while
        }catch (FileNotFoundException ex) {
@@ -126,6 +135,7 @@ public static void reservedwords(){
        /**/{"216","string"},       
     };
 }//method reserved words
+
 }//class
 
 /*this is only a test a good one!*/
