@@ -112,7 +112,7 @@ class Lexicon{
                             }else{
                                 lexema = lexema + (char)caracter;
                             }
-                            System.out.println(lexema+" "+valormatriz+" "+ renglon);
+                            System.out.println(lexema+" "+valormatriz+" "+ renglon++);
                             estado = 0;
                             lexema = "";
                         }else{
