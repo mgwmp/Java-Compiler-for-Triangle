@@ -1,4 +1,3 @@
-//import java.io.FileReader;
 import java.io.RandomAccessFile;
 import static java.lang.Character.isDigit;
 import static java.lang.Character.isLetter;
@@ -39,14 +38,7 @@ class Lexicon{
         RandomAccessFile lecturaarchivo = null;
         
         String nombreArchivo = "E:\\Documents\\NetBeansProjects\\Compilador\\src\\prueba.tri";
-        
-                
-     /*   int caracter;
-        int col;
-        String lexema ="";
-        
-        BufferedReader lecturaenbufer = null;*/
-                
+         
         try{
             lecturaarchivo = new RandomAccessFile(nombreArchivo,"r");
          while(caracter != -1){
@@ -103,8 +95,7 @@ class Lexicon{
                                 break;
                             }//switch
 			}//else si es digito
-                  
-                  valormatriz = matriztrans[estado][col];
+                   valormatriz = matriztrans[estado][col];
                   if (valormatriz <100) {
                        estado = valormatriz;
                        if (estado == 0) {
@@ -162,12 +153,12 @@ public static void reservoirwords(){
             {"215","char"},
             {"216","string"}
         };
-               for (int j = 0; j < matrizreservoir.length; j++) {
-                   if(lexema.equals(matrizreservoir[j][1])){
-                       int MPR = Integer.parseInt(matrizreservoir[j][0]);
+               for (int i = 0; i < matrizreservoir.length; i++) {
+                   if(lexema.equals(matrizreservoir[i][1])){
+                       int MPR = Integer.parseInt(matrizreservoir[i][0]);
                        valormatriz=MPR;
-                   }
-               }
+                   }//if
+               }//for
 }//method reserved words
 
 }//class
