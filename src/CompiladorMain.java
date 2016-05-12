@@ -9,7 +9,7 @@ class Lexicon{
      static int caracter;
      static int col, estado = 0, renglon = 0, valormatriz;
      static String lexema="";
-     static nodo P;
+     //static nodo P;
 
     public static void main(String[] args){
         
@@ -116,26 +116,31 @@ class Lexicon{
                             if (valormatriz == 100) {
                               reservoirwords();
                             }
-                        }//else if   
+                            if(valormatriz==100||valormatriz==101||valormatriz==105||valormatriz==114||valormatriz==106||valormatriz==107||valormatriz==117||valormatriz>=200){
+                                lecturaarchivo.seek(lecturaarchivo.getFilePointer()-1);
+                            }else{
+                                lexema = lexema + (char)caracter;
+                            }
+                            System.out.println(lexema+" "+valormatriz+" "+ renglon);
+                            estado = 0;
+                            lexema = "";
+                        }else{
+                            System.out.println("Error");
+                        }  
                 }//while
-                                
-			  
-
-       }catch (FileNotFoundException ex) {
-          System.out.println("No se puede abrir archivo ' " + nombreArchivo + " ' ");
-       }catch (IOException ex) {
-         System.out.println("error leyendo el archivo ' " + nombreArchivo + " ' ");
-       }finally{
-         try {
-           if (lecturaarchivo != null) {
-             lecturaarchivo.close();
-           }
-         } catch (IOException e) {
-           
-         }
-       }
-		
-    }//main
+                    }catch (FileNotFoundException ex) {
+                       System.out.println("No se puede abrir archivo ' " + nombreArchivo + " ' ");
+                    }catch (IOException ex) {
+                      System.out.println("error leyendo el archivo ' " + nombreArchivo + " ' ");
+                    }finally{
+                      try {
+                        if (lecturaarchivo != null) {
+                          lecturaarchivo.close();
+                            }
+                          } catch (IOException e) {
+                      }
+                    }
+                 }//main
 public static void reservoirwords(){
         String matrizreservoir[][]=
         {     
@@ -157,6 +162,12 @@ public static void reservoirwords(){
             {"215","char"},
             {"216","string"}
         };
+               for (int j = 0; j < matrizreservoir.length; j++) {
+                   if(lexema.equals(matrizreservoir[j][1])){
+                       int MPR = Integer.parseInt(matrizreservoir[j][0]);
+                       valormatriz=MPR;
+                   }
+               }
 }//method reserved words
 
 }//class
