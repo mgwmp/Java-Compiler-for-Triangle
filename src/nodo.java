@@ -1,13 +1,12 @@
-public class nodo {
-    String lexema;
-    int token;
+class nodo {
+    String lexema="";
     int renglon;
+    int token;
     nodo sig = null;
-    
-    nodo(String palabra, int token, int renglon){
-    this.lexema = lexema;
-    this.token = token;
-    this.renglon = renglon;
-    
-    }
-}
+
+    nodo(String lexem, int tok, int reng){
+    lexema = lexem; //se usa el this para referenciar dentro de la clase a la variable.
+    token = tok;
+    renglon = reng;
+    }//nodo 
+}//class nodo
