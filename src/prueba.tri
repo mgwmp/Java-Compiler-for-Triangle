@@ -1,3 +1,9 @@
-
+!This is a commet. It continues to the end-of-line.
 let 
-'a 
+    const - 7;
+    var n: integer
+in
+    begin
+    n := 2 * m * m;
+    put (n)
+    end
