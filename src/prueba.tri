@@ -1,9 +1,2 @@
-!This is a commet. It continues to the end-of-line.
-let 
-    const - 7;
-    var n: integer
-in
-    begin
-    n := 2 * m * m;
-    put (n)
-    end
+'a 
+iosaji

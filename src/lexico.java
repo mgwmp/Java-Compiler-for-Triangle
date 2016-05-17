@@ -5,9 +5,8 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.isLetter;
  class lexico {
          int caracter;
-         int col, estado = 0, renglon = 0, valormatriz, token, error;
+         int col, estado = 0, renglon = 1, valormatriz, token, error;
          String lexema="";
-         //nodo p;
          nodo cabeza = null,p;
     public  void lexic(){
 
@@ -72,7 +71,7 @@ import static java.lang.Character.isLetter;
                                 break;
                                 case')': col = 15;
                                 break;
-                                case 34: col = 16;
+                                case '"': col = 16;//doble comilla
                                 break;
                                 case 39 : col = 17;//comilla simple
                                 break;
@@ -86,6 +85,7 @@ import static java.lang.Character.isLetter;
                                 renglon = renglon + 1;
                                 break;
                                 case 3: col = 22;//fin de archivo
+                                renglon = renglon +1;
                                 break;
                                 default: col = 23;//
                                 break;
@@ -99,31 +99,35 @@ import static java.lang.Character.isLetter;
                       }else{
                           lexema = lexema + (char) caracter;
                        }
-                    }else if (valormatriz >=100 && valormatriz <500 ){
-                            if (valormatriz == 100) {
-                              reservoirwords();
-                            }
-                            if(valormatriz==100||valormatriz==101||valormatriz==105||valormatriz==114||valormatriz==106||valormatriz==107||valormatriz==117||valormatriz>=200){
-                                lecturaarchivo.seek(lecturaarchivo.getFilePointer()-1);
-                            }else{
-                                lexema = lexema + (char)caracter;
-                            }
-                           // System.out.println(lexema+" "+valormatriz+" "+ renglon++);
-                            crearnodo();
-                            estado = 0;
-                            lexema = "";
-                        }else{
-                            //System.out.println("Error");
-                            if (caracter == -1) {
-                                estado =0;
-                            }else{
-                                if (valormatriz>=500) {
-                                    buscaerror();
-                                    System.out.println("Failed Compiled: "+ renglon);
-                                    System.exit(0);
-                                }
-                            }
-                        }  
+                    }else{
+                        if(valormatriz>=100 && valormatriz<500){
+                           if (valormatriz==100) {
+                               reservoirwords();
+                           }
+                           if(valormatriz==100||valormatriz==101||valormatriz==105||valormatriz==114||valormatriz==106||valormatriz==107||valormatriz==117||valormatriz>=200){
+                               lecturaarchivo.seek(lecturaarchivo.getFilePointer()-1);
+
+                           }else{
+                            lexema=lexema+(char)caracter;
+                           }
+
+                           crearnodo();
+                           estado=0;
+                           lexema="";
+
+                       }else{
+                           if(caracter==-1){
+                             //  Lectura.seek(Lectura.getFilePointer()+1);
+                               estado=0;
+                           }else
+                           if(valormatriz>=500){
+                               buscaerror();
+                               System.out.println("Failed compilation at liine: "+renglon);
+                               System.exit(0);
+                           } 
+
+                        }
+                    }
                 }//while
                     }catch (FileNotFoundException ex) {
                        System.out.println("No se puede abrir archivo ' " + nombreArchivo + " ' ");
@@ -156,7 +160,8 @@ import static java.lang.Character.isLetter;
             {"213","get"},
             {"214","integer"},
             {"215","char"},
-            {"216","string"}
+            {"216","string"},
+            {"217","program"},
         };
                for (int i = 0; i < matrizreservoir.length; i++) {
                    if(lexema.equals(matrizreservoir[i][1])){
@@ -168,13 +173,13 @@ import static java.lang.Character.isLetter;
     }//method reserved words
     public void crearnodo(){
      // nodo cabeza = null;
-      nodo nodo = new nodo(lexema, valormatriz, renglon);
+      nodo newnodo = new nodo(lexema, valormatriz, renglon);
        if (cabeza == null){
-           cabeza = nodo;
+           cabeza = newnodo;
            p = cabeza;
       }else{
-           p.sig = nodo;
-           p = nodo;
+           p.sig = newnodo;
+           p = newnodo;
        }
     }
 
@@ -182,7 +187,7 @@ import static java.lang.Character.isLetter;
        String errors[][]={
         /*eol unexpected*/{"500","end of line unexpected"},
          /*invalid symbol*/{"501","invalid symbol"},
-        /*expected*/{"502","expected"},
+        /*expected*/{"502","expected ' "},
        };
        
         for (int i = 0; i < errors.length; i++) {
