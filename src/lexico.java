@@ -8,7 +8,7 @@ import static java.lang.Character.isLetter;
          int col, estado = 0, renglon = 1, valormatriz, token, error;
          String lexema="";
          nodo cabeza = null,p;
-    public  void lexic(){
+    public void lexic(){
 
        int matriztrans[][]={
 	//0	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20	21	22	23
@@ -81,11 +81,10 @@ import static java.lang.Character.isLetter;
                                 break;
                                 case 13: col = 20; // salto de linea
                                 break;
-                                case 10: col = 21; // fin de archivo
+                                case 10: col = 21; // nueva linea
                                 renglon = renglon + 1;
                                 break;
-                                case 3: col = 22;//fin de archivo
-                                renglon = renglon +1;
+                                case -1: col = 22;//fin de archivo marcado con -1
                                 break;
                                 default: col = 23;//
                                 break;
@@ -106,23 +105,20 @@ import static java.lang.Character.isLetter;
                            }
                            if(valormatriz==100||valormatriz==101||valormatriz==105||valormatriz==114||valormatriz==106||valormatriz==107||valormatriz==117||valormatriz>=200){
                                lecturaarchivo.seek(lecturaarchivo.getFilePointer()-1);
-
                            }else{
                             lexema=lexema+(char)caracter;
                            }
-
                            crearnodo();
                            estado=0;
                            lexema="";
-
                        }else{
-                           if(caracter==-1){
-                             //  Lectura.seek(Lectura.getFilePointer()+1);
+                          /* if(caracter==-1){
+                               // lecturaarchivo.seek(lecturaarchivo.getFilePointer()+1);
                                estado=0;
-                           }else
+                           }else*/
                            if(valormatriz>=500){
                                buscaerror();
-                               System.out.println("Failed compilation at liine: "+renglon);
+                               System.out.println("Failed compilation at line: "+renglon);
                                System.exit(0);
                            } 
 
@@ -142,7 +138,7 @@ import static java.lang.Character.isLetter;
                       }
                     }
     }
-    public  void reservoirwords(){
+    public void reservoirwords(){
         String matrizreservoir[][]={     
             {"200","let"},
             {"201","begin"},
@@ -182,7 +178,6 @@ import static java.lang.Character.isLetter;
            p = newnodo;
        }
     }
-
     private void buscaerror() {
        String errors[][]={
         /*eol unexpected*/{"500","end of line unexpected"},
