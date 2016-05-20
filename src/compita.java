@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.io.*;
 
 public class compita{
          public static void main(String[] args)throws IOException{
@@ -7,9 +6,12 @@ public class compita{
                lexicomain.lexic();
                
                lexicomain.p = lexicomain.cabeza;//se apunta 
-               while (lexicomain.p != null) {
+              /* while (lexicomain.p != null) {
                  System.out.println(lexicomain.p.lexema+" "+lexicomain.p.token+" "+lexicomain.p.renglon);//impresión de la lista;
                  lexicomain.p = lexicomain.p.sig;//aquí se avanza al nodo siguiente
-                }//while
+                }//while*/
+              
+              sintaxis callsintax = new sintaxis();//llamada a clase sintaxis 
+              callsintax.Sin(lexicomain.p);
         }//main
 }//class

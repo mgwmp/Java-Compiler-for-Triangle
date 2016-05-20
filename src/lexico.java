@@ -8,6 +8,7 @@ import static java.lang.Character.isLetter;
          int col, estado = 0, renglon = 1, valormatriz, token, error;
          String lexema="";
          nodo cabeza = null,p;
+         
     public void lexic(){
 
        int matriztrans[][]={
@@ -149,7 +150,7 @@ import static java.lang.Character.isLetter;
             {"206","if"},
             {"207","in"},
             {"208","then"},
-            {"209","var"},
+            {"209","var"}, 
             {"210","true"},
             {"211","false"},
             {"212","put"},
