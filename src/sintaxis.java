@@ -163,4 +163,6 @@ public class sintaxis {
     private void expressioncond() {
 
     }
+    
 }//class
+/*ahí la llevas chavo*/
