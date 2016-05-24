@@ -3,12 +3,11 @@ public class sintaxis {
     public lexico lexicomain = new lexico();//creación del objeto lista
     nodo p;
     String numeroerror;
-    boolean error = false;
-     
-    public void Sin(nodo p) {
-      lexicomain.p=lexicomain.cabeza;
-        
-        while(error == false){
+  //  boolean error = false;
+
+    sintaxis(nodo cabeza) {
+      
+        while(p!=null){
             if (p.token==200) {
                 p=p.sig;
                 block();
@@ -16,7 +15,7 @@ public class sintaxis {
                 numeroerror="503";
                 errorsintax();
                 System.out.println("en el renglon"+p.renglon);
-                error = true;
+                System.exit(0);
             }
         }
     
@@ -30,7 +29,7 @@ public class sintaxis {
             numeroerror="505";
             errorsintax();
             System.out.println("En el renglon" + p.renglon);
-            error = true;
+            System.exit(0);
         }       
     }
     private void variabledeclare() {
@@ -42,30 +41,33 @@ public class sintaxis {
                     p=p.sig;
                     methodtype();
                     if (p.token == 116) {
-                        p=p.sig;   
+                        p=p.sig;
+                        if (p.token == 209) {
+                            variabledeclare();
+                        }
                     }else{
                         numeroerror="505";
                         errorsintax();
                         System.out.println("En el renglon" + p.renglon);
-                        error = true;
+                        System.exit(0);
                     }
                 }else{
                     numeroerror ="507";
                     errorsintax();
                     System.out.println("En el renglon "+p.renglon);
-                    error = true;
+                    System.exit(0);
                 }
             }else{
                 numeroerror ="506";
                 errorsintax();
                 System.out.println("En el renglon "+p.renglon);
-                error=true;
+                System.exit(0);
             }
         }else{
             numeroerror="504";
             errorsintax();
             System.out.println("En el renglon"+p.renglon);
-            error = true;
+            System.exit(0);
         }
     }//delcaracion variables
     private void methodtype() {
@@ -75,7 +77,7 @@ public class sintaxis {
             numeroerror ="508";
             errorsintax();
             System.out.println("En el renglon"+p.renglon);
-            error =true;
+            System.exit(0);
         }
     }
     private void block1() {
@@ -85,7 +87,7 @@ public class sintaxis {
             numeroerror="509";
             errorsintax();
             System.out.println("En el renglon" + p.renglon);
-            error = true;
+            System.exit(0);
             command();
         }
     }
@@ -116,7 +118,7 @@ public class sintaxis {
         }else{
             if (p.token == 206) {
                 p = p.sig;
-                expressioncond();
+                expression();
                 if (p.token==208) {
                     p = p.sig;
                     command();
@@ -124,12 +126,12 @@ public class sintaxis {
                     numeroerror = "511";
                     errorsintax();
                     System.out.println("En el renglon " + p.renglon);
-                    error = true;
+                    System.exit(0);
                 }
             }else{
                 if (p.token == 202) {
                     p = p.sig;
-                    expressioncond();
+                    expression();
                     if (p.token==203) {
                         p = p.sig;
                         command();
@@ -137,7 +139,7 @@ public class sintaxis {
                         numeroerror = "512";
                         errorsintax();
                         System.out.println("En el Renglon "+p.renglon);
-                        error=true;
+                        System.exit(0);
                     }
                 }else{
                     if (p.token == 213){
@@ -149,7 +151,7 @@ public class sintaxis {
                             numeroerror = "510";
                             errorsintax();
                             System.out.println("En el Renglon "+p.renglon);
-                            error=true;
+                            System.exit(0);
                             
                         }
                     }
@@ -160,9 +162,26 @@ public class sintaxis {
     private void arithmetic() {
 
     }
-    private void expressioncond() {
 
+
+    private void expression() {
+        secundaryespression();
     }
+
+    private void primaryexpression() {
+        
+    }
+
+    private void secundaryespression() {
+        primaryexpression();
+        secundaryexpression2();
+    }
+    
+    private void secundaryexpression2() {
+            
+    }
+
+
     
 }//class
 /*ahí la llevas chavo*/
