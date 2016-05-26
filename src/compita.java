@@ -11,7 +11,8 @@ public class compita{
                  lexicomain.p = lexicomain.p.sig;//aquí se avanza al nodo siguiente
                 }//while*/
               
-              sintaxis callsintax = new sintaxis();//llamada a clase sintaxis 
-              callsintax.Sin(lexicomain.p);
+              sintaxis callsintax = new sintaxis(lexicomain.cabeza);
+                //llamada a clase sintaxis 
+              //callsintax.Sin(lexicomain.p);
         }//main
 }//class

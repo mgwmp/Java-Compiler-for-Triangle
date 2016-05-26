@@ -1,1 +1,14 @@
 let
+var a: integer;
+var b: integer;
+in
+    a:=643;
+    b:=100;
+    if a>b then
+        begin
+            put("El numero mayor es: ", a);
+        else
+            put("El numero mayor es: ", b);
+        end
+    end
+end    
