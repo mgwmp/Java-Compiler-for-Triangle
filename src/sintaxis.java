@@ -14,7 +14,7 @@ public class sintaxis {
                 if (p.token == 207) {
                     gop();
                     if (p.token == 100 || p.token == 206 || p.token == 202 || p.token == 213 || p.token == 212) {
-                        block1();
+                        block();
                     }else{
                         numeroerror = "521";
                         errorsintax();
@@ -44,10 +44,6 @@ public class sintaxis {
                 System.exit(0);
             }
         }   
-    }//ok
-    private void block() {
-       variabledeclare();
-       block1();
     }//ok
     private void variabledeclare() {
         if (p.token==209) {
@@ -97,12 +93,12 @@ public class sintaxis {
             System.exit(0);
         }
     }//ok
-    private void block1() {
+    private void block() {
          if(p.token==100||p.token==206||p.token==202||p.token==213||p.token==212){
             command();
          }
          if(p.token==100||p.token==206||p.token==202||p.token==213||p.token==212){
-                block1();
+                block();
          }
     }//ok
     private void command() {
@@ -126,7 +122,7 @@ public class sintaxis {
                 System.out.println(" En el renglon "+p.renglon);
                 System.exit(0);
             }
-           //block1();
+           //block();
        }else{
            if(p.token==206){
                gop();
@@ -142,7 +138,7 @@ public class sintaxis {
                if(p.token==201){
                    gop();
                    command();
-                   block1();
+                   block();
                    if(p.token==205&&p.sig==null){
                         numeroerror="520";
                         errorsintax();
@@ -169,7 +165,7 @@ public class sintaxis {
                    if(p.token==201){
                        gop();
                        command();
-                       block1();
+                       block();
                        if(p.token==205&&p.sig==null){
                             numeroerror="520";
                             errorsintax();
@@ -206,14 +202,14 @@ public class sintaxis {
                    if(p.token==201){
                        gop();
                        command();
-                       block1();
+                       block();
                        if(p.token==205 && p.sig==null){
                             numeroerror="520";
                             errorsintax();
                             System.out.println("  En el renglon "+p.renglon);
                             System.exit(0);
                         }
-                       //block1();
+                       //block();
                        if(p.token==205){
                            gop();
                            if(p.token==205&&p.sig==null){
@@ -258,7 +254,7 @@ public class sintaxis {
                                     System.out.println(" En el renglon "+p.renglon);
                                     System.exit(0);
                                 }
-                               //block1();
+                               //block();
                            }else{
                                 numeroerror="515";
                                 errorsintax();
@@ -286,7 +282,7 @@ public class sintaxis {
                                                gop();
                                                if(p.token==116){
                                                     gop();
-                                                    //block1();
+                                                    //block();
                                                 }else{
                                                     numeroerror="505";
                                                     errorsintax();
@@ -318,7 +314,7 @@ public class sintaxis {
                                            gop();
                                            if(p.token==116){
                                                gop();
-                                               //block1();
+                                               //block();
                                                
                                                if(p.token==118){
                                                     numeroerror="521";
