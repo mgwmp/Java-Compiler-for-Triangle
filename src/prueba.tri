@@ -1,14 +1,26 @@
 let
-var a: integer;
-var b: integer;
+var a:integer;
 in
-    a:=643;
-    b:=100;
-    if a>b then
+    get (a);
+    if a<b then
         begin
-            put("El numero mayor es: ", a);
-        else
-            put("El numero mayor es: ", b);
-        end
+        b:=100;
+            while a>b do
+            begin 
+                G:=G*2;
+                while a>b do
+            begin
+                G:=G*2;
+            end
+                get (a);
+    if a<b then
+        begin
+        b:=100;
+            while a>b do
+            begin
+                G:=G*2;
+            end
     end
-end    
+            end
+    end
+end

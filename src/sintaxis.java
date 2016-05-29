@@ -3,22 +3,47 @@ public class sintaxis {
     public lexico lexicomain = new lexico();//creación del objeto lista
     nodo p;
     String numeroerror;
-  //  boolean error = false;
+  
 
     sintaxis(nodo cabeza) {
-      
+      p = cabeza;
         while(p!=null){
-            if (p.token==200) {
-                gop();;
-                block();
+            if (p.token == 200) {
+                gop();
+                variabledeclare();
+                if (p.token == 207) {
+                    gop();
+                    if (p.token == 100 || p.token == 206 || p.token == 202 || p.token == 213 || p.token == 212) {
+                        block1();
+                    }else{
+                        numeroerror = "521";
+                        errorsintax();
+                        System.out.println("En el renglón " + p.renglon);
+                        System.exit(0);
+                        
+                    }
+                }else{
+                    numeroerror = "509";
+                    errorsintax();
+                    System.out.println("En el renglón " + p.renglon);
+                    System.exit(0);
+                }
             }else{
-                numeroerror="503";
+                numeroerror = "503";
                 errorsintax();
-                System.out.println("en el renglon"+p.renglon);
+                System.out.println("En el renglón " + p.renglon);
                 System.exit(0);
             }
-        }
-    
+            if (p.token == 205) {
+                System.out.println("Compiled Succesfull");
+                System.exit(0);
+            }else{
+                numeroerror = "520";
+                errorsintax();
+                System.out.println("En el renglón " + p.renglon);
+                System.exit(0);
+            }
+        }   
     }//ok
     private void block() {
        variabledeclare();
@@ -73,230 +98,304 @@ public class sintaxis {
         }
     }//ok
     private void block1() {
-        if (p.token == 207) {
-            gop();
-            if(p.token == 100 || p.token == 206 || p.token == 202 || p.token == 213 || p.token == 212) {
-               command();
-                if (p.token == 116) {
-                    gop();
-                    if (p.token == 100 || p.token == 206 || p.token == 202 || p.token == 213 || p.token == 212) {
-                        command();
-                    }
-                    if (p.token == 205) {
-                        gop();
-                    }else{
-                        numeroerror="520";
-                        errorsintax();
-                        System.out.println("En el renglon "+p.renglon);
-                        System.exit(0);
-                    }
-                }else{
-                    numeroerror="505";
+         if(p.token==100||p.token==206||p.token==202||p.token==213||p.token==212){
+            command();
+         }
+         if(p.token==100||p.token==206||p.token==202||p.token==213||p.token==212){
+                block1();
+         }
+    }//ok
+    private void command() {
+        if(p.token==100){
+           gop();
+           if(p.token==120){
+               gop();
+           }else{
+                numeroerror="522";
+                errorsintax();
+                System.out.println(" En el renglon "+p.renglon);
+                System.exit(0);
+           }
+           expression();
+           if(p.token==116){
+                gop();
+
+            }else{
+                numeroerror="505";
+                errorsintax();
+                System.out.println(" En el renglon "+p.renglon);
+                System.exit(0);
+            }
+           //block1();
+       }else{
+           if(p.token==206){
+               gop();
+               expression();
+               if(p.token==208){
+                   gop();
+               }else{
+                    numeroerror="511";
                     errorsintax();
                     System.out.println(" En el renglon "+p.renglon);
                     System.exit(0);
-                }
-            }else{
-                numeroerror="521";
-                errorsintax();
-                System.out.println(" En el renglon "+p.renglon);
-                System.exit(0);                
-            }
-        }else{
-                numeroerror="509";
-                errorsintax();
-                System.out.println(" En el renglon "+p.renglon);
-                System.exit(0);  
-        }
-    }//ok
-    private void command() {
-        if (p.token == 100) {
-            gop();
-            expression();
-        }else{
-            if (p.token == 206) {
-                gop();
-                expression();
-                if (p.token == 208) {
-                    gop();
-                    if (p.token== 201) {
-                        gop();
-                    }else{
-                        numeroerror="519";
-                        errorsintax();
-                        System.out.println("En el renglon " + p.renglon);
-                        System.exit(0);
-                    }
-                    command();
-                    if (p.token == 204) {
-                        command();
-                        if (p.token == 205) {
-                            gop();
-                        }else{
+               }
+               if(p.token==201){
+                   gop();
+                   command();
+                   block1();
+                   if(p.token==205&&p.sig==null){
                         numeroerror="520";
                         errorsintax();
-                        System.out.println("En el renglon " + p.renglon);
+                        System.out.println("  En el renglon "+p.renglon);
                         System.exit(0);
-                        }
-                    }
-                    if (p.token == 205) {
-                        gop();
-                    }else{
-                        numeroerror="520";
-                        errorsintax();
-                        System.out.println("En el renglon " + p.renglon);
-                        System.exit(0);
-                    }
-                }else{
-                        numeroerror="511";
-                        errorsintax();
-                        System.out.println("En el renglon " + p.renglon);
-                        System.exit(0);                
-                }
-            }else{
-                if (p.token == 202) {
-                    gop();
-                    expression();
-                    if (p.token == 203) {
-                        gop();
-                        if (p.token == 201) {
-                            gop();
-                        }else{
-                        numeroerror="519";
-                        errorsintax();
-                        System.out.println("En el renglon " + p.renglon);
-                        System.exit(0);                            
-                        }
-                        command();
-                        if (p.token == 205) {
-                            gop();
-                        }else{
+                   }
+               }else{
+                    numeroerror="519";
+                    errorsintax();
+                    System.out.println(" En el renglon "+p.renglon);
+                    System.exit(0);
+               }
+               if(p.token==205){
+                   gop();
+                   
+               }else{
+                    numeroerror="520";
+                    errorsintax();
+                    System.out.println("  En el renglon "+p.renglon);
+                    System.exit(0);
+               }
+               if(p.token==204){
+                   gop();
+                   if(p.token==201){
+                       gop();
+                       command();
+                       block1();
+                       if(p.token==205&&p.sig==null){
                             numeroerror="520";
                             errorsintax();
-                            System.out.println("En el renglon " + p.renglon);
-                            System.exit(0);                            
-                        }
-                    }else{
+                            System.out.println("  En el renglon "+p.renglon);
+                            System.exit(0);
+                       }
+                       if(p.token==205){
+                           gop();
+                       }else{
+                           numeroerror="520";
+                            errorsintax();
+                            System.out.println(" En el renglon "+p.renglon);
+                            System.exit(0);
+                       }
+                   }else{
+                        numeroerror="519";
+                        errorsintax();
+                        System.out.println(" En el renglon "+p.renglon);
+                        System.exit(0);
+                   }
+               }
+           }else{
+               if(p.token==202){
+                   gop();
+                   expression();
+                   if(p.token==203){
+                       gop();
+                   }else{
                         numeroerror="512";
                         errorsintax();
-                        System.out.println("En el renglon " + p.renglon);
-                        System.exit(0);                        
-                    }
-                }else{
-                    if (p.token == 213) {
-                        gop();
-                        if (p.token== 118) {
-                            gop();
-                        }else{
-                            numeroerror="516";
+                        System.out.println(" En el renglon "+p.renglon);
+                        System.exit(0);
+                   }
+                   if(p.token==201){
+                       gop();
+                       command();
+                       block1();
+                       if(p.token==205 && p.sig==null){
+                            numeroerror="520";
                             errorsintax();
-                            System.out.println("En el renglon " + p.renglon);
-                            System.exit(0);                            
+                            System.out.println("  En el renglon "+p.renglon);
+                            System.exit(0);
                         }
-                        if (p.token == 100) {
-                            gop();
-                        }else{
-                            numeroerror="506";
-                            errorsintax();
-                            System.out.println("En el renglon " + p.renglon);
-                            System.exit(0);                        
-                        }
-                        if (p.token == 119) {
-                            gop();
-                        }else{
-                            numeroerror="515";
-                            errorsintax();
-                            System.out.println("En el renglon " + p.renglon);
-                            System.exit(0);                            
-                        }
-                    }else{
-                        if (p.token == 212) {
-                            gop();
-                            if (p.token == 118) {
-                                gop();
-                            }else{
-                                numeroerror="516";
+                       //block1();
+                       if(p.token==205){
+                           gop();
+                           if(p.token==205&&p.sig==null){
+                                numeroerror="520";
                                 errorsintax();
-                                System.out.println("En el renglon " + p.renglon);
-                                System.exit(0);                                
-                            }
-                            if (p.token == 121) {
-                                gop();
-                                if (p.token ==115) {
-                                    gop();
-                                }else{
-                                    numeroerror="517";
-                                    errorsintax();
-                                    System.out.println("En el renglon " + p.renglon);
-                                    System.exit(0);                                    
-                                }
-                                if (p.token == 100) {
-                                    gop();
-                                }else{
-                                    numeroerror="506";
-                                    errorsintax();
-                                    System.out.println("En el renglon " + p.renglon);
-                                    System.exit(0);                                    
-                                }
-                                if (p.token == 119) {
-                                    gop();
-                                }else{
-                                    numeroerror="515";
-                                    errorsintax();
-                                    System.out.println("En el renglon " + p.renglon);
-                                    System.exit(0);                                    
-                                }
-                            }
-                            if (p.token == 100) {
-                                gop();
-                            }else{
+                                System.out.println("  En el renglon "+p.renglon);
+                                System.exit(0);
+                           }
+                       }else{
+                            numeroerror="520";
+                            errorsintax();
+                            System.out.println("  En el renglon "+p.renglon);
+                            System.exit(0);
+                       }
+                   }else{
+                        numeroerror="519";
+                        errorsintax();
+                        System.out.println(" En el renglon "+p.renglon);
+                        System.exit(0);
+                   }
+               }else{
+                   if(p.token==213){
+                       gop();
+                       if(p.token==118){
+                           gop();
+                           if(p.token==100){
+                               gop();
+                           }else{
                                 numeroerror="506";
                                 errorsintax();
-                                System.out.println("En el renglon " + p.renglon);
-                                System.exit(0);                                
-                            }
-                            if (p.token == 119) {
-                                gop();
-                            }else{
+                                System.out.println(" En el renglon "+p.renglon);
+                                System.exit(0);
+                           }
+                           if(p.token==119){
+                               gop();
+                               if(p.token==116){
+                                    gop();
+                                    
+                                }else{
+                                    numeroerror="505";
+                                    errorsintax();
+                                    System.out.println(" En el renglon "+p.renglon);
+                                    System.exit(0);
+                                }
+                               //block1();
+                           }else{
                                 numeroerror="515";
                                 errorsintax();
-                                System.out.println("En el renglon " + p.renglon);
-                                System.exit(0);                                
-                            }
-                        }else{
-                            numeroerror="510";
+                                System.out.println(" En el renglon "+p.renglon);
+                                System.exit(0);
+                           }
+                       }else{
+                            numeroerror="516";
                             errorsintax();
-                            System.out.println("En el renglon " + p.renglon);
-                            System.exit(0);                            
-                        }
-                    }
-                }
-            }
-        }
+                            System.out.println(" En el renglon "+p.renglon);
+                            System.exit(0);
+                       }
+                   }else{
+                       if(p.token==212){
+                           gop();
+                           if(p.token==118){
+                               gop();
+                               if(p.token==121){
+                                   gop();
+                                   if(p.token==115){
+                                       gop();
+                                       if(p.token==100){
+                                           gop();
+                                           if(p.token==119){
+                                               gop();
+                                               if(p.token==116){
+                                                    gop();
+                                                    //block1();
+                                                }else{
+                                                    numeroerror="505";
+                                                    errorsintax();
+                                                    System.out.println(" En el renglon "+p.renglon);
+                                                    System.exit(0);
+                                                }
+                                           }else{
+                                                numeroerror="515";
+                                                errorsintax();
+                                                System.out.println(" En el renglon "+p.renglon);
+                                                System.exit(0);
+                                           }
+                                       }else{
+                                            numeroerror="506";
+                                            errorsintax();
+                                            System.out.println(" En el renglon "+p.renglon);
+                                            System.exit(0);
+                                       }
+                                   }else{
+                                        numeroerror="517";
+                                        errorsintax();
+                                        System.out.println(" En el renglon "+p.renglon);
+                                        System.exit(0);
+                                   }
+                               }else{
+                                   if(p.token==100){
+                                       gop();
+                                       if(p.token==119){
+                                           gop();
+                                           if(p.token==116){
+                                               gop();
+                                               //block1();
+                                               
+                                               if(p.token==118){
+                                                    numeroerror="521";
+                                                    errorsintax();
+                                                    System.out.println(" prueba En el renglon "+p.renglon);
+                                                    System.exit(0);
+                                               }
+                                           }else{
+                                                numeroerror="505";
+                                                errorsintax();
+                                                System.out.println(" En el renglon "+p.renglon);
+                                                System.exit(0);
+                                           }
+                                       }else{
+                                            numeroerror="515";
+                                            errorsintax();
+                                            System.out.println(" En el renglon "+p.renglon);
+                                            System.exit(0);
+                                       }
+                                   }else{
+                                        numeroerror="506";
+                                        errorsintax();
+                                        System.out.println(" En el renglon "+p.renglon);
+                                        System.exit(0);
+                                   }
+                               }
+                           }else{
+                                numeroerror="516";
+                                errorsintax();
+                                System.out.println(" En el renglon "+p.renglon);
+                                System.exit(0);
+                           }
+                       }else{
+                            numeroerror="521";
+                            errorsintax();
+                            System.out.println(" prueba En el renglon "+p.renglon);
+                            System.exit(0);
+                       }
+                   }
+               }
+           }
+       }
     }//complicated ok
     private void expression() {
         secundaryexpression();
     }//ok
     private void secundaryexpression() {
         primaryexpression();
-        gop();
-        if (p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
-                p.token==112||p.token==113||p.token==114) {
+        if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
+           p.token==112||p.token==113||p.token==114){
             secundaryexpression2();
         }
     }//ok
     private void primaryexpression() {
-            if(p.token==214||p.token==215||p.token==216||p.token==100||p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
-                    p.token==112||p.token==113||p.token==114||p.token==118){
-            
+        if(p.token==101||p.token==122||p.token==121||p.token==100||p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
+           p.token==112||p.token==113||p.token==114||p.token==118){
+            gop();
+        }else{
             //preguntar si son operadores
             if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
                 p.token==112||p.token==113||p.token==114){
+                gop();
                 primaryexpression();
             }else{
-                
-               if(p.token==118){
+                if(p.token==118){
                    gop();
+                   expression();
+                   gop();
+                   if(p.token==119){
+                       gop();
+                   }else{
+                        numeroerror="515";
+                        errorsintax();
+                        System.out.println(" En el renglon "+p.renglon);
+                        System.exit(0);
+                   }
+
                }else{
                     numeroerror="516";
                     errorsintax();
@@ -304,26 +403,7 @@ public class sintaxis {
                     System.exit(0);
                             
                }
-                //si no son operadores es ( y manda a llamar a expresion
-               expression();
-               gop();
-               if(p.token==119){
-                   gop();
-               }else{
-                    numeroerror="515";
-                    errorsintax();
-                    System.out.println(" En el renglon "+p.renglon);
-                    System.exit(0);
-                            
-               }
             }
-        
-        }else{
-            numeroerror="514";
-            errorsintax();
-            System.out.println(" En el renglon "+p.renglon);
-            System.exit(0);
-                            
         }
     }//ok
     private void secundaryexpression2() {
@@ -331,6 +411,7 @@ public class sintaxis {
            p.token==112||p.token==113||p.token==114){
             primaryexpression();
             secundaryexpression2();
+            gop();
         }
         
     }//ok         
@@ -354,7 +435,8 @@ public class sintaxis {
             {"518","Codigo incompleto"},
             {"519","Se esperaba begin"},
             {"520","Se esperaba end"},
-            {"521","Se esperaba un comando"}            
+            {"521","Se esperaba un comando"},
+            {"522","Se esperaba simbolo de asignacion"}          
                 
         };
         for (int i = 0; i < errores.length; i++) {
