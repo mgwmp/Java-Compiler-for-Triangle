@@ -442,7 +442,7 @@ public class sintaxis {
         }
     }//ok
     private void gop(){
-        if(p==null){
+        if(p.sig==null){
             numeroerror="518";
             errorsintax();
             System.out.println(" En el renglon "+p.renglon);

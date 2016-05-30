@@ -1,5 +1,6 @@
 let
 var a:integer;
+var b:integer;
 in
     get (a);
     if a<b then
@@ -20,6 +21,50 @@ in
             begin
                 G:=G*2;
             end
+    end
+            end
+    end
+   get (a);
+    if a<b then
+        begin
+        b:=100;
+            while a>b do
+            begin 
+                G:=G*2;
+                while a>b do
+            begin
+                G:=G*2;
+            end
+                get (a);
+    if a<b then
+        begin
+        b:=100;
+            while a>b do
+            begin
+                G:=G*2;
+   get (a);
+    if a<b then
+        begin
+        b:=100;
+            while a>b do
+            begin 
+                G:=G*2;
+                while a>b do
+            begin
+                G:=G*2;
+            end
+                get (a);
+    if a<b then
+        begin
+        b:=100;
+            while a>b do
+            begin
+                G:=G*2;
+            end
+    end
+            end
+    end       
+     end
     end
             end
     end
