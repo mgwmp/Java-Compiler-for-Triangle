@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class sintaxis {
@@ -11,11 +12,14 @@ public class sintaxis {
     String typ;
     
     
-    List<nodo2> listavariables = new ArrayList<nodo2>();
+    //List<nodo2> listavariables = new ArrayList<nodo2>();
+    ArrayList<String> arreglovariables = new ArrayList<>();
+
     
-    
+
     sintaxis(nodo cabeza) {
-      p = cabeza;
+      
+        p = cabeza;
         while(p!=null){
             if (p.token == 200) {
                 gop();
@@ -58,7 +62,13 @@ public class sintaxis {
         if (p.token==209) {
             gop();
             if (p.token==100) {
-                lex = p.lexema;
+                if(arreglovariables.contains(p.lexema)){
+                    System.out.println("Compilacion Incorrecta la variable " + p.lexema + " ya está declarada ");
+                    System.exit(0);
+                }else{
+                    arreglovariables.add(p.lexema);
+                    lex = p.lexema;
+                }
                 gop();
                 if (p.token==117) {
                     gop();
@@ -99,11 +109,8 @@ public class sintaxis {
             nodo2 newnodo = new nodo2(typ, lex);
             System.out.println("Tipo: "+ newnodo.type +" ");
             System.out.println("Lex : "+ newnodo.lexema);
-            listavariables.add(newnodo);
-            for (int i = 0; i < listavariables.size(); i++) {
+            //listavariables.add(newnodo);
 
-            }
-            System.out.println("este es lista " + listavariables);
             gop();
         }else{
             numeroerror="508";
@@ -471,4 +478,6 @@ public class sintaxis {
             p=p.sig;
         }
     }//ok
+
+    
 }//class

@@ -9,7 +9,5 @@ class nodo {
     token = tok;
     renglon = reng;
     }//nodo 
-    
-    
-    
+     
 }//class nodo

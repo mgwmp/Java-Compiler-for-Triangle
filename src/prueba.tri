@@ -1,6 +1,8 @@
 let
     var a: integer;
     var b: integer;
+    var c: integer;
+    var c: integer;
 in 
     a := 5;
 
