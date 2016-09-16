@@ -1,10 +1,19 @@
-public class sintaxis {
+import java.util.ArrayList;
+import java.util.List;
 
+public class sintaxis {
+    
     public lexico lexicomain = new lexico();//creación del objeto lista
     nodo p;
     String numeroerror;
-  
-
+    String lex;
+    String dat;
+    String typ;
+    
+    
+    List<nodo2> listavariables = new ArrayList<nodo2>();
+    
+    
     sintaxis(nodo cabeza) {
       p = cabeza;
         while(p!=null){
@@ -49,6 +58,7 @@ public class sintaxis {
         if (p.token==209) {
             gop();
             if (p.token==100) {
+                lex = p.lexema;
                 gop();
                 if (p.token==117) {
                     gop();
@@ -84,7 +94,16 @@ public class sintaxis {
         }
     }//ok
     private void methodtype() {
-        if (p.token == 214 || p.token == 215 || p.token == 216) {
+        if (p.token == 214 || p.token == 215 || p.token == 216||p.token == 219) {
+            typ = p.lexema;
+            nodo2 newnodo = new nodo2(typ, lex);
+            System.out.println("Tipo: "+ newnodo.type +" ");
+            System.out.println("Lex : "+ newnodo.lexema);
+            listavariables.add(newnodo);
+            for (int i = 0; i < listavariables.size(); i++) {
+
+            }
+            System.out.println("este es lista " + listavariables);
             gop();
         }else{
             numeroerror="508";
@@ -94,10 +113,10 @@ public class sintaxis {
         }
     }//ok
     private void block() {
-         if(p.token==100||p.token==206||p.token==202||p.token==213||p.token==212){
+         if(p.token==100||p.token==206||p.token==202||p.token==213||p.token==212 || p.token==218){
             command();
          }
-         if(p.token==100||p.token==206||p.token==202||p.token==213||p.token==212){
+         if(p.token==100||p.token==206||p.token==202||p.token==213||p.token==212|| p.token==218){
                 block();
          }
     }//ok
@@ -432,7 +451,8 @@ public class sintaxis {
             {"519","Se esperaba begin"},
             {"520","Se esperaba end"},
             {"521","Se esperaba un comando"},
-            {"522","Se esperaba simbolo de asignacion"}          
+            {"522","Se esperaba simbolo de asignacion"},
+ 
                 
         };
         for (int i = 0; i < errores.length; i++) {
@@ -451,6 +471,4 @@ public class sintaxis {
             p=p.sig;
         }
     }//ok
-
 }//class
-/*ahí la llevas chavo*/

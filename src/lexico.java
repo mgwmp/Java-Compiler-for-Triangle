@@ -159,6 +159,10 @@ import static java.lang.Character.isLetter;
             {"215","char"},
             {"216","string"},
             {"217","program"},
+            {"218","for"},
+            {"219","double"},
+            
+            
         };
                for (int i = 0; i < matrizreservoir.length; i++) {
                    if(lexema.equals(matrizreservoir[i][1])){
