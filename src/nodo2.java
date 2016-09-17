@@ -8,12 +8,5 @@ public class nodo2 {
     type = typ; //se usa el this para referenciar dentro de la clase a la variable.
     lexema = lex;
     //data = dato;
-    
-    
-    
     }//nodo 
-
-
-
-
 }

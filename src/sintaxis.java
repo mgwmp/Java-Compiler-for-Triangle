@@ -10,12 +10,7 @@ public class sintaxis {
     String lex;
     String dat;
     String typ;
-    
-    
-    //List<nodo2> listavariables = new ArrayList<nodo2>();
     ArrayList<String> arreglovariables = new ArrayList<>();
-
-    
 
     sintaxis(nodo cabeza) {
       
@@ -62,13 +57,7 @@ public class sintaxis {
         if (p.token==209) {
             gop();
             if (p.token==100) {
-                if(arreglovariables.contains(p.lexema)){
-                    System.out.println("Compilacion Incorrecta la variable " + p.lexema + " ya está declarada ");
-                    System.exit(0);
-                }else{
-                    arreglovariables.add(p.lexema);
-                    lex = p.lexema;
-                }
+                dobledeclarada();
                 gop();
                 if (p.token==117) {
                     gop();
@@ -129,6 +118,7 @@ public class sintaxis {
     }//ok
     private void command() {
         if(p.token==100){
+           variablecomp();
            gop();
            if(p.token==120){
                gop();
@@ -147,10 +137,11 @@ public class sintaxis {
                 errorsintax();
                 System.out.println(" En el renglon "+p.renglon);
                 System.exit(0);
-            }
+            } 
            //block();
        }else{
            if(p.token==206){
+               
                gop();
                expression();
                if(p.token==208){
@@ -397,6 +388,9 @@ public class sintaxis {
     private void primaryexpression() {
         if(p.token==101||p.token==122||p.token==121||p.token==100||p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
            p.token==112||p.token==113||p.token==114||p.token==118){
+            if (p.token==100) {
+                variablecomp();
+            }
             gop();
         }else{
             //preguntar si son operadores
@@ -478,6 +472,24 @@ public class sintaxis {
             p=p.sig;
         }
     }//ok
+    private void dobledeclarada(){
+         if(arreglovariables.contains(p.lexema)){
+                    System.out.println("Compilacion Incorrecta la variable " + p.lexema + " ya está declarada ");
+                    System.exit(0);
+                }else{
+                    arreglovariables.add(p.lexema);
+                    lex = p.lexema;
+                }
+    }
+    private void variablecomp() {
+         if(arreglovariables.contains(p.lexema)){
 
+                   
+                }else{
+                     System.out.println("Compilacion Incorrecta la variable " + p.lexema + " No existe ");
+                     System.exit(0);
+
+                }
+    }
     
 }//class

@@ -2,8 +2,19 @@ let
     var a: integer;
     var b: integer;
     var c: integer;
-    var c: integer;
+    
 in 
-    a := 5;
 
+    a := 5;
+    b := 4;
+    
+
+    while b < a do 
+begin
+    bjj := 4;
+end
+    if ap < b then
+    begin
+        x := 7;
+    end
 end   
