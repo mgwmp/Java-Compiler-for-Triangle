@@ -425,9 +425,9 @@ public class sintaxis {
     private void secundaryexpression2() {
         if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
            p.token==112||p.token==113||p.token==114){
+            gop();
             primaryexpression();
             secundaryexpression2();
-            gop();
         }
         
     }//ok         

@@ -31,7 +31,7 @@ import static java.lang.Character.isLetter;
                 
         RandomAccessFile lecturaarchivo = null;
         
-        String nombreArchivo = "E:\\Documents\\NetBeansProjects\\Compilador\\src\\prueba.tri";
+        String nombreArchivo = "E:\\Documents\\NetBeansProjects\\Java-Compiler-for-Triangle\\src\\prueba.tri";
          
         try{
             lecturaarchivo = new RandomAccessFile(nombreArchivo,"r");

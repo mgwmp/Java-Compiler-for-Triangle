@@ -9,12 +9,12 @@ in
     b := 4;
     
 
-    while b < a do 
+    while b > c do 
 begin
-    bjj := 4;
+    c := 4;
 end
-    if ap < b then
+    if a < ca then
     begin
-        x := 7;
+        c := 7;
     end
 end   
