@@ -1,20 +1,8 @@
 let
-    var a: integer;
-    var b: integer;
-    var c: integer;
-    
-in 
+var a: integer;
 
-    a := 5;
-    b := 4;
-    
+in
+ a := 5.2 + 2;
 
-    while b > c do 
-begin
-    c := 4;
+ 
 end
-    if a < ca then
-    begin
-        c := 7;
-    end
-end   
