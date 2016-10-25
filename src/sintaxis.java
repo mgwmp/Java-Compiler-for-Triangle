@@ -1,16 +1,19 @@
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+
 
 public class sintaxis {
-    
-    public lexico lexicomain = new lexico();//creación del objeto lista
+        public lexico lexicomain = new lexico();//creación del objeto lista
     nodo p;
     String numeroerror;
     String lex;
-    String dat;
     String typ;
+    String tok;
+    public static String comprueba;
+    
     ArrayList<String> arreglovariables = new ArrayList<>();
+
+    ArrayList<String> variableini = new ArrayList<>();
+    
 
     sintaxis(nodo cabeza) {
       
@@ -19,16 +22,16 @@ public class sintaxis {
             if (p.token == 200) {
                 gop();
                 variabledeclare();
+                
                 if (p.token == 207) {
                     gop();
-                    if (p.token == 100 || p.token == 206 || p.token == 202 || p.token == 213 || p.token == 212) {
+                    if (p.token == 100 || p.token == 206 || p.token == 202 || p.token == 213 || p.token == 212|| p.token == 218) {
                         block();
                     }else{
                         numeroerror = "521";
                         errorsintax();
                         System.out.println("En el renglón " + p.renglon);
                         System.exit(0);
-                        
                     }
                 }else{
                     numeroerror = "509";
@@ -56,14 +59,18 @@ public class sintaxis {
     private void variabledeclare() {
         if (p.token==209) {
             gop();
+           
+            
             if (p.token==100) {
                 dobledeclarada();
+                
                 gop();
                 if (p.token==117) {
                     gop();
                     methodtype();
                     if (p.token == 116) {
                         gop();
+                        
                         if (p.token == 209) {
                             variabledeclare();
                         }
@@ -95,11 +102,12 @@ public class sintaxis {
     private void methodtype() {
         if (p.token == 214 || p.token == 215 || p.token == 216||p.token == 219) {
             typ = p.lexema;
-            nodo2 newnodo = new nodo2(typ, lex);
+            nodo2 newnodo = new nodo2(typ, lex, tok);
+            
             System.out.println("Tipo: "+ newnodo.type +" ");
             System.out.println("Lex : "+ newnodo.lexema);
-            //listavariables.add(newnodo);
-
+            
+            
             gop();
         }else{
             numeroerror="508";
@@ -118,10 +126,12 @@ public class sintaxis {
     }//ok
     private void command() {
         if(p.token==100){
+                
            variablecomp();
            gop();
            if(p.token==120){
                gop();
+               agregaalista();
            }else{
                 numeroerror="522";
                 errorsintax();
@@ -130,8 +140,9 @@ public class sintaxis {
            }
            expression();
            if(p.token==116){
-                gop();
-
+               agregaalista(); 
+               gop();
+                
             }else{
                 numeroerror="505";
                 errorsintax();
@@ -141,7 +152,6 @@ public class sintaxis {
            //block();
        }else{
            if(p.token==206){
-               
                gop();
                expression();
                if(p.token==208){
@@ -377,24 +387,29 @@ public class sintaxis {
     }//complicated ok
     private void expression() {
         secundaryexpression();
+        
     }//ok
     private void secundaryexpression() {
         primaryexpression();
-        if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
+        if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||
+                p.token==108||p.token==109||p.token==110||p.token==111||
            p.token==112||p.token==113||p.token==114){
             secundaryexpression2();
         }
     }//ok
     private void primaryexpression() {
-        if(p.token==101||p.token==122||p.token==121||p.token==100||p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
-           p.token==112||p.token==113||p.token==114||p.token==118){
+        if(p.token==101||p.token==122||p.token==121||p.token==100||p.token==102||p.token==103||
+                p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
+           p.token==112||p.token==113||p.token==114||p.token==118||p.token == 402){
             if (p.token==100) {
                 variablecomp();
+                
             }
             gop();
         }else{
             //preguntar si son operadores
-            if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
+            if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||
+                    p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
                 p.token==112||p.token==113||p.token==114){
                 gop();
                 primaryexpression();
@@ -425,7 +440,9 @@ public class sintaxis {
     private void secundaryexpression2() {
         if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
            p.token==112||p.token==113||p.token==114){
+            agregaalista();
             gop();
+            agregaalista();
             primaryexpression();
             secundaryexpression2();
         }
@@ -483,13 +500,24 @@ public class sintaxis {
     }
     private void variablecomp() {
          if(arreglovariables.contains(p.lexema)){
-
-                   
                 }else{
                      System.out.println("Compilacion Incorrecta la variable " + p.lexema + " No existe ");
                      System.exit(0);
-
                 }
     }
-    
+    private void agregaalista(){
+        if (p.token == 116) {
+            variableini.clear();
+        }
+        System.out.println(p.lexema);
+        System.out.println("Agregada! ");
+        variableini.add(p.lexema);
+        lex = p.lexema;
+        if (p.lexema == null){
+            System.out.println("Error ");
+            System.exit(0);
+        } else {
+        }
+
+    }
 }//class

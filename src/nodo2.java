@@ -1,12 +1,15 @@
 public class nodo2 {
     String type="";
     String lexema="";
-    String data="";
+    String dato = "";
+    
     nodo2 sig = null;
 
-    nodo2(String typ, String lex){
+    nodo2(String typ, String lex, String dat){
     type = typ; //se usa el this para referenciar dentro de la clase a la variable.
     lexema = lex;
-    //data = dato;
+    dato = dat;
+
     }//nodo 
+
 }
