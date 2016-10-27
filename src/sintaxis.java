@@ -1,20 +1,23 @@
 import java.util.ArrayList;
-
-
 public class sintaxis {
         public lexico lexicomain = new lexico();//creación del objeto lista
     nodo p;
+    nodo f;
     String numeroerror;
     String lex;
     String typ;
     String tok;
+    
+    String dato = null;
+    String tipo;
+    String variable;
+    String variabledos;
     public static String comprueba;
     
     ArrayList<String> arreglovariables = new ArrayList<>();
 
-    ArrayList<String> variableini = new ArrayList<>();
+    ArrayList<nodo3> variableini = new ArrayList<>();
     
-
     sintaxis(nodo cabeza) {
       
         p = cabeza;
@@ -59,18 +62,17 @@ public class sintaxis {
     private void variabledeclare() {
         if (p.token==209) {
             gop();
-           
-            
             if (p.token==100) {
+              
                 dobledeclarada();
-                
+                variable = p.lexema; 
                 gop();
                 if (p.token==117) {
                     gop();
                     methodtype();
                     if (p.token == 116) {
+                        agregaalista();
                         gop();
-                        
                         if (p.token == 209) {
                             variabledeclare();
                         }
@@ -102,10 +104,11 @@ public class sintaxis {
     private void methodtype() {
         if (p.token == 214 || p.token == 215 || p.token == 216||p.token == 219) {
             typ = p.lexema;
+            tipo = p.lexema;
             nodo2 newnodo = new nodo2(typ, lex, tok);
             
-            System.out.println("Tipo: "+ newnodo.type +" ");
-            System.out.println("Lex : "+ newnodo.lexema);
+//            System.out.println("Tipo: "+ newnodo.type +" ");
+//            System.out.println("Lex : "+ newnodo.lexema);
             
             
             gop();
@@ -125,13 +128,22 @@ public class sintaxis {
          }
     }//ok
     private void command() {
-        if(p.token==100){
-                
+        if(p.token==100/*id*/){   
            variablecomp();
+           f = p.sig;
+            if (f.token == 120) {
+                variable = p.lexema;
+            }
            gop();
-           if(p.token==120){
+            
+           if(p.token==120 /*:=*/){
+               
                gop();
-               agregaalista();
+               
+               if (p.token == 116/*;*/) {
+                   
+               }else{
+               }
            }else{
                 numeroerror="522";
                 errorsintax();
@@ -139,8 +151,8 @@ public class sintaxis {
                 System.exit(0);
            }
            expression();
-           if(p.token==116){
-               agregaalista(); 
+           if(p.token==116/*;*/){
+               inicializar();
                gop();
                 
             }else{
@@ -273,7 +285,7 @@ public class sintaxis {
                            if(p.token==119){
                                gop();
                                if(p.token==116){
-                                    gop();
+                                    //agregaalista();
                                     
                                 }else{
                                     numeroerror="505";
@@ -401,7 +413,10 @@ public class sintaxis {
         if(p.token==101||p.token==122||p.token==121||p.token==100||p.token==102||p.token==103||
                 p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
            p.token==112||p.token==113||p.token==114||p.token==118||p.token == 402){
+            variabledos = p.lexema;
             if (p.token==100) {
+                buscarinicializado(p.lexema);
+                dato = p.lexema;
                 variablecomp();
                 
             }
@@ -415,7 +430,8 @@ public class sintaxis {
                 primaryexpression();
             }else{
                 if(p.token==118){
-                   gop();
+                   
+                    gop();
                    expression();
                    gop();
                    if(p.token==119){
@@ -440,9 +456,9 @@ public class sintaxis {
     private void secundaryexpression2() {
         if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
            p.token==112||p.token==113||p.token==114){
-            agregaalista();
+          
             gop();
-            agregaalista();
+        
             primaryexpression();
             secundaryexpression2();
         }
@@ -506,18 +522,33 @@ public class sintaxis {
                 }
     }
     private void agregaalista(){
-        if (p.token == 116) {
-            variableini.clear();
-        }
-        System.out.println(p.lexema);
-        System.out.println("Agregada! ");
-        variableini.add(p.lexema);
-        lex = p.lexema;
-        if (p.lexema == null){
-            System.out.println("Error ");
-            System.exit(0);
-        } else {
-        }
-
+        nodo3 minodo = new nodo3(tipo, variable,  dato);
+        variableini.add(minodo);
+        
+        System.out.println("Tipo : "+ minodo.tipo +" ");
+        System.out.println("Variable : "+ minodo.variable);
+        System.out.println("Dato: "+ minodo.dato);
     }
+    private void buscarinicializado(String variable) {
+        boolean inicializado = false;
+        for (int i = 0; i <variableini.size() ; i++) {
+            if (variableini.get(i).variable == variable ) {
+                if(variableini.get(i).dato != null){
+                     inicializado = true;
+                }
+            }
+        }
+        if (inicializado==false) {
+            System.out.println("La variable "+ variable + " no está inicializada ");
+        }
+    }
+    private void inicializar() {
+         int i = variableini.indexOf(variable);
+         for (int j = 0; j < 10; j++) {
+            
+        }
+    }
+
+
+    
 }//class
