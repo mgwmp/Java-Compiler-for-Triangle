@@ -6,8 +6,11 @@ public class nodo3 {
     nodo3 sig = null;
 
     nodo3(String tipo, String variable, String dato){
-        this.tipo = tipo; //se usa el this para referenciar dentro de la clase a la variable.
+        this.tipo = tipo; 
         this.dato = dato;
         this.variable = variable;
     }//nodo 
+    
+
+    
 }

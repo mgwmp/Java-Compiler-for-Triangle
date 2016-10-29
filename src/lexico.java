@@ -7,7 +7,7 @@ import static java.lang.Character.isLetter;
          int caracter;
          int col, estado = 0, renglon = 1, valormatriz, token, error;
          String lexema="";
-         nodo cabeza = null,p;
+         nodo cabeza = null, p, cabezalexico;
          
     public void lexic(){
 
@@ -199,6 +199,9 @@ import static java.lang.Character.isLetter;
                 System.out.println("Error: " + errors [i][1]);
             }
         }
+    }
+    private void comparaValorVariable(){
+        
     }
 }//class
     

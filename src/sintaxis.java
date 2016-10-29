@@ -3,16 +3,18 @@ public class sintaxis {
         public lexico lexicomain = new lexico();//creación del objeto lista
     nodo p;
     nodo f;
+    nodo q;
+    nodo2 nodoVariables;
     String numeroerror;
     String lex;
     String typ;
     String tok;
     
-    String dato = null;
+    
     String tipo;
     String variable;
     String variabledos;
-    public static String comprueba;
+    
     
     ArrayList<String> arreglovariables = new ArrayList<>();
 
@@ -21,6 +23,7 @@ public class sintaxis {
     sintaxis(nodo cabeza) {
       
         p = cabeza;
+        q = cabeza;
         while(p!=null){
             if (p.token == 200) {
                 gop();
@@ -50,7 +53,9 @@ public class sintaxis {
             }
             if (p.token == 205) {
                 System.out.println("Compiled Succesfull");
+                imprimeNodo();
                 System.exit(0);
+                
             }else{
                 numeroerror = "520";
                 errorsintax();
@@ -65,13 +70,13 @@ public class sintaxis {
             if (p.token==100) {
               
                 dobledeclarada();
-                variable = p.lexema; 
+                //variable = p.lexema; 
                 gop();
                 if (p.token==117) {
                     gop();
                     methodtype();
                     if (p.token == 116) {
-                        agregaalista();
+                        
                         gop();
                         if (p.token == 209) {
                             variabledeclare();
@@ -102,14 +107,25 @@ public class sintaxis {
         }
     }//ok
     private void methodtype() {
+        
         if (p.token == 214 || p.token == 215 || p.token == 216||p.token == 219) {
             typ = p.lexema;
-            tipo = p.lexema;
-            nodo2 newnodo = new nodo2(typ, lex, tok);
             
-//            System.out.println("Tipo: "+ newnodo.type +" ");
-//            System.out.println("Lex : "+ newnodo.lexema);
+            nodo2 nodo = new nodo2(typ, lex, tok);
             
+            if(nodoVariables == null){
+                nodoVariables = new nodo2(typ, lex, null);
+            }else{
+                nodo2 nodoaux = nodoVariables;
+                while(nodoaux.nextRight != null){
+                    nodoaux = nodoaux.nextRight;
+                   
+                }
+                nodo2 nodoValor = new nodo2(typ, lex, null);
+                nodoaux.nextRight = nodoValor;
+                
+            }
+           
             
             gop();
         }else{
@@ -152,7 +168,7 @@ public class sintaxis {
            }
            expression();
            if(p.token==116/*;*/){
-               inicializar();
+               
                gop();
                 
             }else{
@@ -415,8 +431,6 @@ public class sintaxis {
            p.token==112||p.token==113||p.token==114||p.token==118||p.token == 402){
             variabledos = p.lexema;
             if (p.token==100) {
-                buscarinicializado(p.lexema);
-                dato = p.lexema;
                 variablecomp();
                 
             }
@@ -521,34 +535,73 @@ public class sintaxis {
                      System.exit(0);
                 }
     }
-    private void agregaalista(){
-        nodo3 minodo = new nodo3(tipo, variable,  dato);
-        variableini.add(minodo);
+    private void imprimeNodo(){
+        nodo2 nodoaux = nodoVariables;
+        while(nodoaux.nextRight != null){
+            System.out.print("Nombre " + nodoaux.lexema);
+            System.out.print(" Tipo "+nodoaux.type);
+            System.out.println(" Dato "+nodoaux.dato);
+            nodoaux = nodoaux.nextRight;
+        }
+            System.out.print("Nombre " + nodoaux.lexema);
+            
+            System.out.print(" Tipo "+nodoaux.type);
+            System.out.println(" Dato "+nodoaux.dato);
+            
+            revisarValores();
         
-        System.out.println("Tipo : "+ minodo.tipo +" ");
-        System.out.println("Variable : "+ minodo.variable);
-        System.out.println("Dato: "+ minodo.dato);
     }
-    private void buscarinicializado(String variable) {
-        boolean inicializado = false;
-        for (int i = 0; i <variableini.size() ; i++) {
-            if (variableini.get(i).variable == variable ) {
-                if(variableini.get(i).dato != null){
-                     inicializado = true;
+    private void revisarValores(){ 
+       String valorVariable;
+       String nombreVariable;
+        nodo aux = q;
+        while(aux.token != 207){
+            if (aux.sig == null) {
+                break;
+            }
+            aux = aux.sig;
+        }
+        while(aux.sig != null){
+            valorVariable = "";
+            if (aux.token == 100) {
+                nombreVariable = aux.lexema;
+                aux = aux.sig;
+                if (aux.token == 120) {
+                    while(aux.token != 116){
+                        if (aux.token != 100 ) {
+                            valorVariable += aux.lexema;
+                        }else{
+                            String valorActualVariable = revisarInicializacion(aux.lexema);
+                            if(valorActualVariable != null){
+                                valorVariable += valorActualVariable;
+                                
+                            }else{
+                                    System.out.println("Error ");
+                                    aux = aux.sig;
+                                    continue;
+                            }
+                        }
+                        aux = aux.sig;
+                    }
+                }else{
+                    
                 }
             }
-        }
-        if (inicializado==false) {
-            System.out.println("La variable "+ variable + " no está inicializada ");
-        }
-    }
-    private void inicializar() {
-         int i = variableini.indexOf(variable);
-         for (int j = 0; j < 10; j++) {
             
+            
+        
         }
+   
+    
     }
-
-
+    private String revisarInicializacion(String nombreVariable){
+        nodo2  aux = nodoVariables;
+        while(aux != null){
+            if (aux.lexema.equals(nombreVariable)) {
+                return aux.getVariableDato();
+            }
+        }
+        return null;
+    }
     
 }//class
