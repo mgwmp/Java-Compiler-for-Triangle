@@ -4,7 +4,6 @@ public class nodo2 {
     String dato = "";
     nodo2 nextRight;
     
-    
 
     nodo2(String typ, String lex, String dat){
     type = typ; //se usa el this para referenciar dentro de la clase a la variable.
