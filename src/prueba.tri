@@ -1,8 +1,11 @@
 let 
 var a: string;
-var b: string;
-var c: double;
+var z: string;
+
 in 
 a := 7;
+a := a + a;
+a := a + a;
+
 
 end

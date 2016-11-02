@@ -21,7 +21,7 @@ public class sintaxis {
     ArrayList<nodo3> variableini = new ArrayList<>();
     
     sintaxis(nodo cabeza) {
-      
+        
         p = cabeza;
         q = cabeza;
         while(p!=null){
@@ -155,10 +155,11 @@ public class sintaxis {
            if(p.token==120 /*:=*/){
                
                gop();
-               
+             
                if (p.token == 116/*;*/) {
                    
                }else{
+                   
                }
            }else{
                 numeroerror="522";
@@ -290,6 +291,7 @@ public class sintaxis {
                        gop();
                        if(p.token==118){
                            gop();
+                           
                            if(p.token==100){
                                gop();
                            }else{
@@ -370,7 +372,6 @@ public class sintaxis {
                                            if(p.token==116){
                                                gop();
                                                //block();
-                                               
                                                if(p.token==118){
                                                     numeroerror="521";
                                                     errorsintax();
@@ -444,8 +445,7 @@ public class sintaxis {
                 primaryexpression();
             }else{
                 if(p.token==118){
-                   
-                    gop();
+                   gop();
                    expression();
                    gop();
                    if(p.token==119){
@@ -536,7 +536,9 @@ public class sintaxis {
                 }
     }
     private void imprimeNodo(){
+          revisarValores();
         nodo2 nodoaux = nodoVariables;
+      
         while(nodoaux.nextRight != null){
             System.out.print("Nombre " + nodoaux.lexema);
             System.out.print(" Tipo "+nodoaux.type);
@@ -548,7 +550,7 @@ public class sintaxis {
             System.out.print(" Tipo "+nodoaux.type);
             System.out.println(" Dato "+nodoaux.dato);
             
-            revisarValores();
+            
         
     }
     private void revisarValores(){ 
@@ -563,36 +565,40 @@ public class sintaxis {
         }
         while(aux.sig != null){
             valorVariable = "";
-            if (aux.token == 100) {
+            if (aux.token == 100/*id*/) {
                 nombreVariable = aux.lexema;
                 aux = aux.sig;
-                if (aux.token == 120) {
-                    while(aux.token != 116){
-                        if (aux.token != 100 ) {
+                
+                if (aux.token == 120/*:=*/) {
+                    aux = aux.sig;
+
+                    while(aux.token != 116/*;*/){
+                        if (aux.token != 100/*id*/ ) {
                             valorVariable += aux.lexema;
                         }else{
                             String valorActualVariable = revisarInicializacion(aux.lexema);
+                           
                             if(valorActualVariable != null){
                                 valorVariable += valorActualVariable;
                                 
                             }else{
-                                    System.out.println("Error ");
-                                    aux = aux.sig;
-                                    continue;
+                                    System.out.println("Error Variable no inicializada " + aux.lexema + " en el renglon " + aux.renglon);
                             }
                         }
                         aux = aux.sig;
                     }
+                        asignarValor(valorVariable, nombreVariable);
                 }else{
                     
+                    if (revisarInicializacion(nombreVariable)== null) {
+                        System.out.println("Error variable no inicializada " + nombreVariable + " en el renglon " + aux.renglon);
+                    }
                 }
-            }
-            
-            
-        
-        }
-   
-    
+                    
+            }else{
+                aux = aux.sig;
+            }       
+        }   
     }
     private String revisarInicializacion(String nombreVariable){
         nodo2  aux = nodoVariables;
@@ -600,8 +606,36 @@ public class sintaxis {
             if (aux.lexema.equals(nombreVariable)) {
                 return aux.getVariableDato();
             }
+            aux = aux.nextRight;
         }
         return null;
     }
+    private void asignarValor(String dato,String nombreVariable){
+          nodo2 aux = nodoVariables;
+          while(aux !=null){
+              if (aux.lexema.equals(nombreVariable)) {
+                  aux.setVariableDato(dato);
+                  break;
+              }
+              aux = aux.nextRight;
+          }
+    }
+    private void compruebaVacio(){
+        nodo aux = p;
+        while(aux != null){
+            if (aux.token == 120) {
+                 aux = aux.sig;
+            }
+            if (aux.token == 116) {
+                System.out.println("Error espacio en blanco " + aux.renglon);
+                System.exit(0);
+            }
+            aux = aux.sig;
+        }
+        
+
+    }
+    
+
     
 }//class
