@@ -1,9 +1,12 @@
 let 
-var a: string;
-var z: string;
-
+var a: string ;
+var z: double ;
+var b: integer ;
 in 
-a := 7.8;
+a:= "sd";
+z := 4.5;
 
+b:=3;
+b++ ;
 
-end
+end    

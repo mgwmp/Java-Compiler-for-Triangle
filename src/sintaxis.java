@@ -9,7 +9,7 @@ public class sintaxis {
     String lex;
     String typ;
     String tok;
-    
+    String CompTipo;
     
     String tipo;
     String variable;
@@ -145,13 +145,27 @@ public class sintaxis {
     }//ok
     private void command() {
         if(p.token==100/*id*/){   
-           variablecomp();
-           f = p.sig;
+            variablecomp();
+            
             if (f.token == 120) {
                 variable = p.lexema;
+                buscarTipo(variable);
+                
             }
-           gop();
-            
+            if(f.token == 403 || f.token == 404){
+                CompTipo = "integer";
+                compararTipo(p.lexema);
+                CompTipo = "";
+            }
+            gop();
+            if(p.token == 403 || p.token == 404){
+                gop();
+                if (p.token == 116/*;*/) {
+                   
+               }else{
+                   
+               }
+            }else
            if(p.token==120 /*:=*/){
                
                gop();
@@ -168,8 +182,9 @@ public class sintaxis {
                 System.exit(0);
            }
            expression();
+           
            if(p.token==116/*;*/){
-               
+               CompTipo = "";
                gop();
                 
             }else{
@@ -182,6 +197,19 @@ public class sintaxis {
        }else{
            if(p.token==206){
                gop();
+                if (p.token==100) {
+                    variablecomp();
+                    buscarTipo(p.lexema);
+                }
+                if(p.token == 101){
+                    CompTipo = "integer";
+                }
+                if(p.token == 121){
+                    CompTipo = "string";
+                }
+                if(p.token == 122){
+                    CompTipo = "char";
+                }
                expression();
                if(p.token==208){
                    gop();
@@ -245,7 +273,21 @@ public class sintaxis {
                }
            }else{
                if(p.token==202){
-                   gop();
+                    gop();
+                    if (p.token==100) {
+                        variablecomp();
+                        buscarTipo(p.lexema);
+                    }
+                    if(p.token == 101){
+                        CompTipo = "integer";
+                    }
+                    if(p.token == 121){
+                        CompTipo = "string";
+                    }
+                    if(p.token == 122){
+                        CompTipo = "char";
+                    }
+                    
                    expression();
                    if(p.token==203){
                        gop();
@@ -433,8 +475,25 @@ public class sintaxis {
             variabledos = p.lexema;
             if (p.token==100) {
                 variablecomp();
-                
+                compararTipo(p.lexema);
             }
+            //integer 101, string 121, char 122, double
+            if(p.token == 101){
+                compararTipo2("integer");
+            }
+            if(p.token == 121){
+                compararTipo2("string");
+                if(f.token==103||f.token==104||f.token==105){
+                    System.out.println("Error no puedes hacer - / * ");
+                }
+            }
+            if(p.token == 122){
+                compararTipo2("char");
+            }
+            if(p.token == 402){
+                compararTipo2("double");
+            }
+            
             gop();
         }else{
             //preguntar si son operadores
@@ -517,6 +576,7 @@ public class sintaxis {
             System.exit(0);
         }else{
             p=p.sig;
+            f = p.sig;
         }
     }//ok
     private void dobledeclarada(){
@@ -530,10 +590,11 @@ public class sintaxis {
     }
     private void variablecomp() {
          if(arreglovariables.contains(p.lexema)){
-                }else{
-                     System.out.println("Compilacion Incorrecta la variable " + p.lexema + " No existe ");
-                     System.exit(0);
-                }
+             
+        }else{
+             System.out.println("Compilacion Incorrecta la variable " + p.lexema + " No existe ");
+             System.exit(0);
+        }
     }
     private void imprimeNodo(){
           revisarValores();
@@ -546,7 +607,6 @@ public class sintaxis {
             nodoaux = nodoaux.nextRight;
         }
             System.out.print("Nombre " + nodoaux.lexema);
-            
             System.out.print(" Tipo "+nodoaux.type);
             System.out.println(" Dato "+nodoaux.dato);
             
@@ -620,22 +680,40 @@ public class sintaxis {
               aux = aux.nextRight;
           }
     }
-    private void compruebaVacio(){
-        nodo aux = p;
+    
+    private void buscarTipo(String nombreVariable){
+        nodo2  aux = nodoVariables;
         while(aux != null){
-            if (aux.token == 120) {
-                 aux = aux.sig;
+            if (aux.lexema.equals(nombreVariable)) {
+                CompTipo = aux.type;
             }
-            if (aux.token == 116) {
-                System.out.println("Error espacio en blanco " + aux.renglon);
-                System.exit(0);
+            aux = aux.nextRight;
+        }
+    }
+    private void compararTipo2(String nombreVariable){
+            if(CompTipo.equals("double") && nombreVariable.equals("integer")){
+                
+            }else if (!CompTipo.equals(nombreVariable)) {
+                System.out.println("Error tipo de variable incompatible");
             }
-            aux = aux.sig;
+           
+        
+    }
+    private void compararTipo(String nombreVariable){
+        nodo2  aux = nodoVariables;
+        while(aux != null){
+            if(aux.lexema.equals(nombreVariable) && (f.lexema.equals("+") || f.lexema.equals("-"))&& !aux.type.equals("integer")){
+                System.out.println("Error tipo de variable incompatible");
+            }
+            if (aux.lexema.equals(nombreVariable) && !CompTipo.equals(aux.type)) {
+                System.out.println("Error tipo de variable incompatible");
+            }
+            aux = aux.nextRight;
         }
         
-
     }
-    
+    private void buscarValor(){
 
-    
+        
+    }    
 }//class
