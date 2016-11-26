@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 public class sintaxis {
-        public lexico lexicomain = new lexico();//creación del objeto lista
+    public lexico lexicomain = new lexico();//creación del objeto lista
     nodo p;
     nodo f;
     nodo q;
@@ -21,7 +21,6 @@ public class sintaxis {
     ArrayList<nodo3> variableini = new ArrayList<>();
     
     sintaxis(nodo cabeza) {
-        
         p = cabeza;
         q = cabeza;
         while(p!=null){
@@ -477,14 +476,21 @@ public class sintaxis {
                 variablecomp();
                 compararTipo(p.lexema);
             }
+            if(f.token==105 && CompTipo == "integer"){
+                    System.out.println("Perdida de precisión en el renglon " + p.renglon);
+                      System.exit(0);
+                }
+            
             //integer 101, string 121, char 122, double
             if(p.token == 101){
                 compararTipo2("integer");
+                
             }
             if(p.token == 121){
                 compararTipo2("string");
                 if(f.token==103||f.token==104||f.token==105){
                     System.out.println("Error no puedes hacer - / * ");
+                    System.exit(0);
                 }
             }
             if(p.token == 122){
@@ -492,6 +498,7 @@ public class sintaxis {
             }
             if(p.token == 402){
                 compararTipo2("double");
+                
             }
             
             gop();
@@ -575,7 +582,7 @@ public class sintaxis {
             System.out.println(" En el renglon "+p.renglon);
             System.exit(0);
         }else{
-            p=p.sig;
+            p = p.sig;
             f = p.sig;
         }
     }//ok
@@ -680,7 +687,6 @@ public class sintaxis {
               aux = aux.nextRight;
           }
     }
-    
     private void buscarTipo(String nombreVariable){
         nodo2  aux = nodoVariables;
         while(aux != null){
@@ -694,7 +700,8 @@ public class sintaxis {
             if(CompTipo.equals("double") && nombreVariable.equals("integer")){
                 
             }else if (!CompTipo.equals(nombreVariable)) {
-                System.out.println("Error tipo de variable incompatible");
+                System.out.println("Error tipo de variable incompatible " + "en el renglon " + p.renglon);
+                System.exit(0);
             }
            
         
@@ -702,18 +709,21 @@ public class sintaxis {
     private void compararTipo(String nombreVariable){
         nodo2  aux = nodoVariables;
         while(aux != null){
+            /*if(aux.lexema.equals(nombreVariable) && aux.type.equals("integer") && f.token==105){
+                    System.out.println("Error no puedes hacer  / ");
+                    System.exit(0);
+                }*/
+            
             if(aux.lexema.equals(nombreVariable) && (f.lexema.equals("+") || f.lexema.equals("-"))&& !aux.type.equals("integer")){
-                System.out.println("Error tipo de variable incompatible");
+                System.out.println("Error tipo de variable incompatible " + "en el renglon " + p.renglon);
+                System.exit(0);
             }
             if (aux.lexema.equals(nombreVariable) && !CompTipo.equals(aux.type)) {
-                System.out.println("Error tipo de variable incompatible");
+                System.out.println("Error tipo de variable incompatible " + "en el renglon " + p.renglon);
+                System.exit(0);
             }
             aux = aux.nextRight;
         }
         
     }
-    private void buscarValor(){
-
-        
-    }    
 }//class
