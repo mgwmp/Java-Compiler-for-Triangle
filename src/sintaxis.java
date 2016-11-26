@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 public class sintaxis {
     public lexico lexicomain = new lexico();//creación del objeto lista
@@ -15,10 +17,19 @@ public class sintaxis {
     String variable;
     String variabledos;
     
+    String header;
+    String body;
+    String footer;
+    String code;
+    String variableconcatenadas = "";
+    String codecomplete;
+    
     
     ArrayList<String> arreglovariables = new ArrayList<>();
 
     ArrayList<nodo3> variableini = new ArrayList<>();
+    
+
     
     sintaxis(nodo cabeza) {
         p = cabeza;
@@ -53,7 +64,10 @@ public class sintaxis {
             if (p.token == 205) {
                 System.out.println("Compiled Succesfull");
                 imprimeNodo();
+                ensamblador();
+                aTexto();
                 System.exit(0);
+                
                 
             }else{
                 numeroerror = "520";
@@ -61,7 +75,9 @@ public class sintaxis {
                 System.out.println("En el renglón " + p.renglon);
                 System.exit(0);
             }
-        }   
+        }
+
+        
     }//ok
     private void variabledeclare() {
         if (p.token==209) {
@@ -725,5 +741,35 @@ public class sintaxis {
             aux = aux.nextRight;
         }
         
+    }
+    private void ensamblador(){
+        header = "INCLUDE macros.mac \n DOSSEG \n .MODEL SMALL \n STACK 100h \n .DATA \n $BLANCOS\t DB '$' \n $MENOS \t\t DB '-$' \n $COUNT \t\t DW 0 \n $NEGATIVO\tDB\t0 \n $BUFFER\tDB\t8\tDUP('$') \n $BUFFERTEMP DB\t8\tDUP('$')\n $LISTAPAR \tLABEL BYTE \n $LONGMAX \tDB 255\n $TOTCAR \t\t DB ? \n $INTRODUCIDOS \tDB 255 DUP('$') \n $S_TEMP\tDB\t255\tDUP('$')\t;STRING TEMPORAL \n $I_TEMP\tDW\t0000H\t\t\t;INT TEMPORAL \n $CONCAT\tDB\t255\tDUP('$') \n $1\t\tDW\t0000H\t\t\t\n $2\t\tDW\t0000H\n $3\t\tDW\t0000H\n";
+        body = ".CODE \n .386 \n BEGIN: \n \t\t MOV\tAX, @DATA \n\t\t MOV\tDS, AX \n\t\t CALL\tCOMPI \n\t\t MOV AX, 4C00H \n\t\t INT 21H \n COMPI  PROC \n \n";
+        footer = "\t RET \n COMPI  ENDP \n INCLUDE subs.sub \n END BEGIN \n \n";
+        
+                  nodo2 aux = nodoVariables;
+          while(aux !=null){
+              if (aux.type.equals("integer")|| aux.type.equals("double")) {
+                 variableconcatenadas += aux.lexema + "  DW  ? \n" ;
+              
+              }else if(aux.type.equals("string")||aux.type.equals("char")){
+                  variableconcatenadas += aux.lexema + "  DB  255  DUP('$') \n" ;
+              }              
+              aux = aux.nextRight;
+              
+          }
+          codecomplete = header + variableconcatenadas + body + footer;
+          
+    
+    }
+    private void aTexto(){
+        try{
+        File archivo = new File("Ensamblador.txt");
+        FileWriter escribir = new FileWriter(archivo, true);
+        escribir.write(codecomplete);
+        escribir.close();
+      }catch(Exception e){
+            System.out.println("Errore al escribir ");
+      }
     }
 }//class

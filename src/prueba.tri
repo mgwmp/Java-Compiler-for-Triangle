@@ -2,8 +2,9 @@ let
 var b: integer ;
 var z: double;
 var j: string;
+var r: char;
 in 
 
-z:= "5.4" + "8.3" / "7.7";
+z:= 5.4 + 3 / 7.7;
  
 end    
