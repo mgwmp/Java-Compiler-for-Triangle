@@ -203,9 +203,6 @@ import static java.lang.Character.isLetter;
             }
         }
     }
-    private void comparaValorVariable(){
-        
-    }
 }//class
     
                 

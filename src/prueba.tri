@@ -1,10 +1,12 @@
 let 
-var b: integer ;
-var z: double;
-var j: string;
-var r: char;
+
+var k: string;
+var i: string;
+var x: integer;
 in 
 
-z:= 5.4 + 3 / 7.7;
- 
+k:= "hola mundo";
+i:= "hello friend";
+x:= 4;
+end
 end    

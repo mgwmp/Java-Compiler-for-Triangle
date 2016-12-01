@@ -7,6 +7,8 @@ public class sintaxis {
     nodo f;
     nodo q;
     nodo2 nodoVariables;
+    nodoImpreso nodoImpresion;
+    String impreso;
     String numeroerror;
     String lex;
     String typ;
@@ -20,10 +22,12 @@ public class sintaxis {
     String header;
     String body;
     String footer;
-    String code;
+    String code ="";
     String variableconcatenadas = "";
     String codecomplete;
     
+    String CompTipo2;
+    int contador = 0;
     
     ArrayList<String> arreglovariables = new ArrayList<>();
 
@@ -211,10 +215,16 @@ public class sintaxis {
            //block();
        }else{
            if(p.token==206){
+               
                gop();
+               
                 if (p.token==100) {
                     variablecomp();
                     buscarTipo(p.lexema);
+                    if (CompTipo.equals("string")) {
+                        System.out.println("Error perdida de precisión" );
+                        System.exit(0);
+                    }
                 }
                 if(p.token == 101){
                     CompTipo = "integer";
@@ -504,6 +514,13 @@ public class sintaxis {
             }
             if(p.token == 121){
                 compararTipo2("string");
+                variableconcatenadas +=  "@impreso"+ contador + " DB  " + p.lexema + ", '$'\n";
+               // nodoImpresion = new nodoImpreso( "@impreso" + contador, p.lexema);
+                        nodoImpreso aux = nodoImpresion;
+                            aux.setVariableImpreso(p.lexema);
+
+                contador++;
+                
                 if(f.token==103||f.token==104||f.token==105){
                     System.out.println("Error no puedes hacer - / * ");
                     System.exit(0);
@@ -611,6 +628,7 @@ public class sintaxis {
                     lex = p.lexema;
                 }
     }
+    
     private void variablecomp() {
          if(arreglovariables.contains(p.lexema)){
              
@@ -694,20 +712,51 @@ public class sintaxis {
         return null;
     }
     private void asignarValor(String dato,String nombreVariable){
-          nodo2 aux = nodoVariables;
-          while(aux !=null){
-              if (aux.lexema.equals(nombreVariable)) {
-                  aux.setVariableDato(dato);
-                  break;
-              }
-              aux = aux.nextRight;
-          }
+        
+        buscarTipo2(nombreVariable);
+        if(CompTipo2.equals("integer")|| CompTipo2.equals("double")){
+            code += "MOV  AX, " + dato + "\nI_ASIGNAR  " + nombreVariable + ", AX\n";
+        } else if(CompTipo2.equals("string") || CompTipo2.equals("char")){
+            nodoImpreso aux = nodoImpresion;
+            while(aux !=null){
+                if (aux.lexema.equals(dato)) {
+                    impreso = aux.impreso1;
+                }
+                aux = aux.nextRight;
+            }
+            if (impreso != null) {
+                code += "S_ASIGNAR " + nombreVariable + ",  " + impreso + "\n " ;
+            }
+
+            
+        }
+        
+        nodo2 aux = nodoVariables;
+        while(aux !=null){
+            if (aux.lexema.equals(nombreVariable)) {
+                aux.setVariableDato(dato);
+                break;
+            }
+            aux = aux.nextRight;
+        }
+          
+          
     }
     private void buscarTipo(String nombreVariable){
         nodo2  aux = nodoVariables;
         while(aux != null){
             if (aux.lexema.equals(nombreVariable)) {
                 CompTipo = aux.type;
+            }
+            aux = aux.nextRight;
+        }
+    }
+    
+    private void buscarTipo2(String nombreVariable){
+        nodo2  aux = nodoVariables;
+        while(aux != null){
+            if (aux.lexema.equals(nombreVariable)) {
+                CompTipo2 = aux.type;
             }
             aux = aux.nextRight;
         }
@@ -758,7 +807,7 @@ public class sintaxis {
               aux = aux.nextRight;
               
           }
-          codecomplete = header + variableconcatenadas + body + footer;
+          codecomplete = header + variableconcatenadas + body + code + footer;
           
     
     }
@@ -772,4 +821,6 @@ public class sintaxis {
             System.out.println("Errore al escribir ");
       }
     }
+   
+
 }//class
