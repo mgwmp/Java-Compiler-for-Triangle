@@ -3,10 +3,17 @@ let
 var k: string;
 var i: string;
 var x: integer;
+var y: integer;
+var z: integer;
 in 
+x :=3;
+y := x;
+i := "sd" + "hola" + "jaja";
+k := "sd";
+i := "sd" + "hola" + "jaja";
+k := "sd";
+x ++ ;
+y -- ;
 
-k:= "hola mundo";
-i:= "hello friend";
-x:= 4;
 end
 end    

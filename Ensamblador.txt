@@ -481,3 +481,2941 @@ I_ASIGNAR  x, AX
  INCLUDE subs.sub 
  END BEGIN 
  
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+S_ASIGNAR k,  "hola mundo"
+ S_ASIGNAR i,  "hello friend"
+ 	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ 	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ MOV  AX, 3
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ MOV  AX, 3
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+I_COUT x
+
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ MOV  AX, 3
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+I_COUT x
+
+S_COUT k
+
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ MOV  AX, 3
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+I_COUT x
+
+S_COUT k
+
+S_CIN k
+
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ MOV  AX, 3
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+I_COUT x
+
+S_COUT k
+
+S_CIN k
+
+S_CIN i
+
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ MOV  AX, 3
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+I_COUT x
+
+S_COUT k
+
+S_CIN k
+
+I_CIN x
+
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ MOV  AX, 3
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola mundo", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+I_COUT x
+
+S_COUT k
+
+S_CIN k
+
+I_CIN x
+
+MOV  AX, 3
+I_ASIGNAR  x, AX
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ 	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+I_COUT x
+
+S_COUT k
+
+S_CIN k
+
+I_CIN x
+
+MOV  AX, 3
+I_ASIGNAR  x, AX
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ 	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hello friend", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+I_COUT x
+
+S_COUT k
+
+S_CIN k
+
+I_CIN x
+
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ MOV  AX, 3
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hola", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hola", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hola", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hola", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR $1, @impreso1, $1 
+ MOV AX, $1 
+ S_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hola", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, CONCATENAR $1, @impreso1, $1 
+ MOV AX, $1 
+ S_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hola", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+MOV AX, $1 
+ S_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hola", '$'
+@impreso2 DB  "hola", '$'
+@impreso3 DB  "mundo", '$'
+@impreso4 DB  "hola", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+MOV AX, $1 
+ S_ASIGNAR x, AX 
+
+CONCATENAR @impreso2, @impreso3, $1 
+CONCATENAR $1, @impreso4, $1 
+ MOV AX, $1 
+ S_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hola", '$'
+@impreso2 DB  "hola", '$'
+@impreso3 DB  "mundo", '$'
+@impreso4 DB  "hola", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+MOV AX, $1 
+ S_ASIGNAR x, AX 
+
+CONCATENAR @impreso2, @impreso3, $1 
+CONCATENAR $1, @impreso4, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hola", '$'
+@impreso2 DB  "hola", '$'
+@impreso3 DB  "mundo", '$'
+@impreso4 DB  "hola", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+MOV AX, $1 
+ S_ASIGNAR x, AX 
+
+CONCATENAR @impreso2, @impreso3, $1 
+CONCATENAR $1, @impreso4, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola fghfh", '$'
+@impreso1 DB  "hola", '$'
+@impreso2 DB  "hola", '$'
+@impreso3 DB  "mundo", '$'
+@impreso4 DB  "hola", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+MOV AX, $1 
+ S_ASIGNAR k, AX 
+
+CONCATENAR @impreso2, @impreso3, $1 
+CONCATENAR $1, @impreso4, $1 
+CONCATENAR $1, @impreso5, $1 
+CONCATENAR $1, @impreso6, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+MOV  AX, 3+ 2
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+MOV  AX, 3+ 2
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+MOV  AX, 3+ 2
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+RESTA 2,  , $0
+MOV  AX, 3- 2
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+RESTA 3, 2, $0
+MOV AX, $0
+ I_ASIGNAR x, AX 
+
+MOV  AX, 3- 2
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+RESTA 3, 2, $0
+MOV AX, $0
+ I_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+SUMAR 1, 0, $0
+MOV  AX, /5*+ 10
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+DIVIDE y, 5, $0
+MULTI $0, z, $1
+SUMAR 1, 0, $2
+MOV  AX, /5*+ 10
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+DIVIDE y, 5, $0
+MULTI $0, z, $1
+SUMAR $1, 1, $2
+MOV AX, $2
+ I_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+DIVIDE y, 5, $0
+MULTI $0, z, $1
+MOV  AX, /5*+ 10
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+DIVIDE y, 5, $0
+MULTI $0, z, $1
+MOV  AX, /5*+ 10
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+DIVIDE y, 5, $0
+MULTI $0, z, $1
+SUMAR $1, 10, $2
+MOV AX, $2
+ I_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+MULTI 5, z, $0
+DIVIDE y, $0, $1
+SUMAR $1, 10, $2
+MOV AX, $2
+ I_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+MULTI x, y, $0
+MULTI 5, z, $1
+DIVIDE $0, $1, $2
+SUMAR $2, 10, $3
+RESTA $3, 3, $4
+RESTA $4, 2, $5
+MOV AX, $5
+ I_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "mundo", '$'
+@impreso2 DB  "jaja", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR k, AX 
+
+MULTI x, y, $0
+MULTI 5, z, $1
+DIVIDE $0, $1, $2
+SUMAR $2, 10, $3
+RESTA $3, 3, $4
+RESTA $4, 2, $5
+MOV AX, $5
+ I_ASIGNAR x, AX 
+
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+RESTAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+I_COUT x
+
+I_CIN x
+
+MOV  AX, */(5*)+ 10- 3- 2
+I_ASIGNAR  x, AX
+MOV  AX, 4
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "mundo", '$'
+@impreso2 DB  "jaja", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR k, AX 
+
+MULTI x, y, $0
+MULTI 5, z, $1
+DIVIDE $0, $1, $2
+SUMAR $2, 10, $3
+RESTA $3, 3, $4
+RESTA $4, 2, $5
+MOV AX, $5
+ I_ASIGNAR x, AX 
+
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+RESTAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+S_COUT k
+
+S_CIN k
+
+MOV  AX, */(5*)+ 10- 3- 2
+I_ASIGNAR  x, AX
+MOV  AX, 4
+I_ASIGNAR  x, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "mundo", '$'
+@impreso2 DB  "jaja", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR k, AX 
+
+MULTI x, y, $0
+MULTI 5, z, $1
+DIVIDE $0, $1, $2
+SUMAR $2, 10, $3
+RESTA $3, 3, $4
+RESTA $4, 2, $5
+MOV AX, $5
+ I_ASIGNAR x, AX 
+
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+RESTAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+S_COUT k
+
+S_CIN k
+
+MOV  AX, */(5*)+ 10- 3- 2
+I_ASIGNAR  x, AX
+MOV  AX, 4
+I_ASIGNAR  z, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "mundo", '$'
+@impreso2 DB  "jaja", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR k, AX 
+
+MULTI x, y, $0
+MULTI 5, z, $1
+DIVIDE $0, $1, $2
+SUMAR $2, 10, $3
+RESTA $3, 3, $4
+RESTA $4, 2, $5
+MOV AX, $5
+ I_ASIGNAR x, AX 
+
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+RESTAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+S_COUT k
+
+S_CIN k
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "mundo", '$'
+@impreso2 DB  "jaja", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR k, AX 
+
+MULTI x, y, $0
+MULTI 5, z, $1
+DIVIDE $0, $1, $2
+SUMAR $2, 10, $3
+RESTA $3, 3, $4
+RESTA $4, 2, $5
+MOV AX, $5
+ I_ASIGNAR x, AX 
+
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+RESTAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+S_COUT k
+
+S_CIN k
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "mundo", '$'
+@impreso2 DB  "jaja", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+MOV  AX, 5
+I_ASIGNAR  z, AX
+CONCATENAR @impreso0, S_ASIGNAR k,  @impreso0
+ @impreso1, $1 
+S_ASIGNAR k,  @impreso1
+ CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR k, AX 
+
+S_ASIGNAR k,  @impreso2
+ MULTI x, y, $0
+MULTI 5, z, $1
+DIVIDE $0, $1, $2
+SUMAR $2, 10, $3
+RESTA $3, 3, $4
+RESTA $4, 2, $5
+MOV AX, $5
+ I_ASIGNAR x, AX 
+
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+RESTAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+MOV  AX, - 
+I_ASIGNAR  x, AX
+S_COUT k
+
+S_CIN k
+
+MOV  AX, 4
+I_ASIGNAR  z, AX
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "mundo", '$'
+@impreso2 DB  "jaja", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+MOV AX, 5
+I_ASIGNAR zAX
+
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR k, AX 
+
+S_ASIGNAR k,  @impreso2
+ MULTI x, y, $0
+MULTI 5, z, $1
+DIVIDE $0, $1, $2
+SUMAR $2, 10, $3
+RESTA $3, 3, $4
+RESTA $4, 2, $5
+MOV AX, $5
+ I_ASIGNAR x, AX 
+
+SUMAR , 1, $1
+MOV AX, $1
+I_ASIGNAR ,  AX
+
+RESTAR , 1, $1
+MOV AX, $1
+I_ASIGNAR ,  AX
+
+S_COUT k
+
+S_CIN k
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "mundo", '$'
+@impreso2 DB  "jaja", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+MOV AX, 5
+I_ASIGNAR z AX
+
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR k, AX 
+
+S_ASIGNAR k,  @impreso2
+ MULTI x, y, $0
+MULTI 5, z, $1
+DIVIDE $0, $1, $2
+SUMAR $2, 10, $3
+RESTA $3, 3, $4
+RESTA $4, 2, $5
+MOV AX, $5
+ I_ASIGNAR x, AX 
+
+SUMAR , 1, $1
+MOV AX, $1
+I_ASIGNAR ,  AX
+
+RESTAR , 1, $1
+MOV AX, $1
+I_ASIGNAR ,  AX
+
+S_COUT k
+
+S_CIN k
+
+MOV AX, 4
+I_ASIGNAR z AX
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "sd", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+@impreso0, $1 
+MOV AX, $1 
+ S_ASIGNAR k, AX 
+
+S_ASIGNAR k,  @impreso0
+ @impreso1, $1 
+MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR i,  @impreso1
+ MOV AX, i
+S_ASIGNAR k AX
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "sd", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+S_ASIGNAR k,  @impreso0
+ S_ASIGNAR i,  @impreso1
+ MOV AX, i
+S_ASIGNAR k AX
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "sd", '$'
+@impreso2 DB  "hola", '$'
+@impreso3 DB  "jaja", '$'
+@impreso4 DB  "sd", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+S_ASIGNAR k,  @impreso0
+ CONCATENAR @impreso1, @impreso2, $1 
+CONCATENAR $1, @impreso3, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR i,  @impreso3
+ S_ASIGNAR i,  @impreso4
+ MOV AX, i
+S_ASIGNAR k AX
+
+MULTI 2, 9, $0
+SUMAR 3, $0, $1
+SUMAR $1, 6, $2
+MOV AX, $2
+ I_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "hola", '$'
+@impreso1 DB  "sd", '$'
+@impreso2 DB  "hola", '$'
+@impreso3 DB  "jaja", '$'
+@impreso4 DB  "sd", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+S_ASIGNAR k,  @impreso0
+ CONCATENAR @impreso1, @impreso2, $1 
+CONCATENAR $1, @impreso3, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR i,  @impreso3
+ S_ASIGNAR k,  @impreso4
+ MOV AX, i
+S_ASIGNAR k AX
+
+MULTI 2, 9, $0
+SUMAR 3, $0, $1
+SUMAR $1, 6, $2
+MOV AX, $2
+ I_ASIGNAR x, AX 
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "sd", '$'
+@impreso1 DB  "hola", '$'
+@impreso2 DB  "jaja", '$'
+@impreso3 DB  "sd", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR i,  @impreso2
+ S_ASIGNAR k,  @impreso3
+ 	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "sd", '$'
+@impreso1 DB  "hola", '$'
+@impreso2 DB  "jaja", '$'
+@impreso3 DB  "sd", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR k,  @impreso3
+ 	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "sd", '$'
+@impreso1 DB  "hola", '$'
+@impreso2 DB  "jaja", '$'
+@impreso3 DB  "sd", '$'
+@impreso4 DB  "sd", '$'
+@impreso5 DB  "hola", '$'
+@impreso6 DB  "jaja", '$'
+@impreso7 DB  "sd", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR k,  @impreso3
+ CONCATENAR @impreso4, @impreso5, $1 
+CONCATENAR $1, @impreso6, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR k,  @impreso7
+ 	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "sd", '$'
+@impreso1 DB  "hola", '$'
+@impreso2 DB  "jaja", '$'
+@impreso3 DB  "sd", '$'
+@impreso4 DB  "sd", '$'
+@impreso5 DB  "hola", '$'
+@impreso6 DB  "jaja", '$'
+@impreso7 DB  "sd", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+MOV AX, 3
+I_ASIGNAR x AX
+
+MOV AX, x
+I_ASIGNAR y AX
+
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR k,  @impreso3
+
+CONCATENAR @impreso4, @impreso5, $1 
+CONCATENAR $1, @impreso6, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR k,  @impreso7
+
+SUMAR , 1, $1
+MOV AX, $1
+I_ASIGNAR ,  AX
+
+RESTAR , 1, $1
+MOV AX, $1
+I_ASIGNAR ,  AX
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 
+INCLUDE macros.mac 
+ DOSSEG 
+ .MODEL SMALL 
+ STACK 100h 
+ .DATA 
+ $BLANCOS	 DB '$' 
+ $MENOS 		 DB '-$' 
+ $COUNT 		 DW 0 
+ $NEGATIVO	DB	0 
+ $BUFFER	DB	8	DUP('$') 
+ $BUFFERTEMP DB	8	DUP('$')
+ $LISTAPAR 	LABEL BYTE 
+ $LONGMAX 	DB 255
+ $TOTCAR 		 DB ? 
+ $INTRODUCIDOS 	DB 255 DUP('$') 
+ $S_TEMP	DB	255	DUP('$')	;STRING TEMPORAL 
+ $I_TEMP	DW	0000H			;INT TEMPORAL 
+ $CONCAT	DB	255	DUP('$') 
+ $1		DW	0000H			
+ $2		DW	0000H
+ $3		DW	0000H
+@impreso0 DB  "sd", '$'
+@impreso1 DB  "hola", '$'
+@impreso2 DB  "jaja", '$'
+@impreso3 DB  "sd", '$'
+@impreso4 DB  "sd", '$'
+@impreso5 DB  "hola", '$'
+@impreso6 DB  "jaja", '$'
+@impreso7 DB  "sd", '$'
+k  DB  255  DUP('$') 
+i  DB  255  DUP('$') 
+x  DW  ? 
+y  DW  ? 
+z  DW  ? 
+.CODE 
+ .386 
+ BEGIN: 
+ 		 MOV	AX, @DATA 
+		 MOV	DS, AX 
+		 CALL	COMPI 
+		 MOV AX, 4C00H 
+		 INT 21H 
+ COMPI  PROC 
+ 
+MOV AX, 3
+I_ASIGNAR x AX
+
+MOV AX, x
+I_ASIGNAR y AX
+
+CONCATENAR @impreso0, @impreso1, $1 
+CONCATENAR $1, @impreso2, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR k,  @impreso3
+
+CONCATENAR @impreso4, @impreso5, $1 
+CONCATENAR $1, @impreso6, $1 
+ MOV AX, $1 
+ S_ASIGNAR i, AX 
+
+S_ASIGNAR k,  @impreso7
+
+SUMAR x, 1, $1
+MOV AX, $1
+I_ASIGNAR x,  AX
+
+RESTAR y, 1, $1
+MOV AX, $1
+I_ASIGNAR y,  AX
+
+	 RET 
+ COMPI  ENDP 
+ INCLUDE subs.sub 
+ END BEGIN 
+ 

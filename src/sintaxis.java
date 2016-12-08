@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Stack;
+import static java.lang.Character.isDigit;
 public class sintaxis {
     public lexico lexicomain = new lexico();//creación del objeto lista
     nodo p;
@@ -8,6 +10,8 @@ public class sintaxis {
     nodo q;
     nodo2 nodoVariables;
     nodoImpreso nodoImpresion;
+    nodoImpreso cabeza = null;
+    nodoImpreso pp;
     String impreso;
     String numeroerror;
     String lex;
@@ -16,7 +20,7 @@ public class sintaxis {
     String CompTipo;
     
     String tipo;
-    String variable;
+    String variable, variable2;
     String variabledos;
     
     String header;
@@ -25,6 +29,9 @@ public class sintaxis {
     String code ="";
     String variableconcatenadas = "";
     String codecomplete;
+    Boolean conca1 = false;
+    Boolean conca2 = false, concate = false;
+    Boolean expresion2 = false;
     
     String CompTipo2;
     int contador = 0;
@@ -33,7 +40,13 @@ public class sintaxis {
 
     ArrayList<nodo3> variableini = new ArrayList<>();
     
-
+    ArrayList<nodoImpreso> arrayImpreso = new ArrayList<nodoImpreso>();
+    
+    //POLACA
+    String codigoExpresion = "";
+    Boolean expresion = false, exp = false;
+    
+    ArrayList<String> array_postfijo = new ArrayList<String> ();
     
     sintaxis(nodo cabeza) {
         p = cabeza;
@@ -165,11 +178,19 @@ public class sintaxis {
     private void command() {
         if(p.token==100/*id*/){   
             variablecomp();
-            
+            //Aqui preguntamos si el token futuro es un ":=" para agregar a la 
+            //variable "variable" el lexema y despues asignarlo en el ensamblador
             if (f.token == 120) {
                 variable = p.lexema;
                 buscarTipo(variable);
                 
+            }
+            //Aqui preguntamos si lo que sigue es un incremento o decremento para 
+            //Guardar la variable y despues en ensamblador hacer "SUMAR variable2 " 
+            //Porque la variable "variable" no llega a ese punto ya que solo se 
+            //asigna cuando el token futuro es un ":="
+            if(f.token == 403 || f.token == 404){
+                variable2 = p.lexema;
             }
             if(f.token == 403 || f.token == 404){
                 CompTipo = "integer";
@@ -178,6 +199,11 @@ public class sintaxis {
             }
             gop();
             if(p.token == 403 || p.token == 404){
+                if(p.lexema.equals("+")){
+                    code = code + ("SUMAR " + variable2 + ", 1, $1\nMOV AX, $1\nI_ASIGNAR " + variable2 + ",  AX\n\n");
+                }else if(p.lexema.equals("-")){
+                    code = code + "RESTAR " + variable2 + ", 1, $1\nMOV AX, $1\nI_ASIGNAR " + variable2 + ",  AX\n\n";
+                }
                 gop();
                 if (p.token == 116/*;*/) {
                    
@@ -203,7 +229,11 @@ public class sintaxis {
            expression();
            
            if(p.token==116/*;*/){
+               
                CompTipo = "";
+               variable = "";
+               expresion2 = false;
+               concate = false;
                gop();
                 
             }else{
@@ -360,6 +390,8 @@ public class sintaxis {
                            gop();
                            
                            if(p.token==100){
+                               lex = p.lexema;
+                               buscarTipo2(lex);
                                gop();
                            }else{
                                 numeroerror="506";
@@ -371,7 +403,12 @@ public class sintaxis {
                                gop();
                                if(p.token==116){
                                     //agregaalista();
-                                    
+                                    if(CompTipo2.equals("integer") || CompTipo2.equals("double")){
+                                        code += "I_CIN " + lex + "\n\n";
+                                    }else if(CompTipo2.equals("string") || CompTipo2.equals("char")){
+                                        code += "S_CIN " + lex + "\n\n";
+                                    }
+                                    gop();
                                 }else{
                                     numeroerror="505";
                                     errorsintax();
@@ -391,6 +428,8 @@ public class sintaxis {
                             System.out.println(" En el renglon "+p.renglon);
                             System.exit(0);
                        }
+                       lex = "";
+                       CompTipo2 = "";
                    }else{
                        if(p.token==212){
                            gop();
@@ -433,47 +472,56 @@ public class sintaxis {
                                    }
                                }else{
                                    if(p.token==100){
+                                        lex = p.lexema;
+                                        buscarTipo2(lex);
                                        gop();
                                        if(p.token==119){
                                            gop();
                                            if(p.token==116){
+                                                if(CompTipo2.equals("integer") || CompTipo2.equals("double")){
+                                                    code += "I_COUT " + lex + "\n\n";
+                                                }else if(CompTipo2.equals("string") || CompTipo2.equals("char")){
+                                                    code += "S_COUT " + lex + "\n\n";
+                                                }
                                                gop();
                                                //block();
                                                if(p.token==118){
                                                     numeroerror="521";
                                                     errorsintax();
-                                                    System.out.println(" prueba En el renglon "+p.renglon);
+                                                    System.out.println(" prueba En el renglon "+p.renglon + numeroerror);
                                                     System.exit(0);
                                                }
                                            }else{
                                                 numeroerror="505";
                                                 errorsintax();
-                                                System.out.println(" En el renglon "+p.renglon);
+                                                System.out.println(" En el renglon "+p.renglon + numeroerror);
                                                 System.exit(0);
                                            }
                                        }else{
                                             numeroerror="515";
                                             errorsintax();
-                                            System.out.println(" En el renglon "+p.renglon);
+                                            System.out.println(" En el renglon "+p.renglon + numeroerror);
                                             System.exit(0);
                                        }
                                    }else{
                                         numeroerror="506";
                                         errorsintax();
-                                        System.out.println(" En el renglon "+p.renglon);
+                                        System.out.println(" En el renglon "+p.renglon+ numeroerror);
                                         System.exit(0);
                                    }
+                                   lex = "";
+                                   CompTipo2 = "";
                                }
                            }else{
                                 numeroerror="516";
                                 errorsintax();
-                                System.out.println(" En el renglon "+p.renglon);
+                                System.out.println(" En el renglon "+p.renglon+ numeroerror);
                                 System.exit(0);
                            }
                        }else{
                             numeroerror="521";
                             errorsintax();
-                            System.out.println(" prueba En el renglon "+p.renglon);
+                            System.out.println(" prueba En el renglon "+p.renglon+ numeroerror);
                             System.exit(0);
                        }
                    }
@@ -508,17 +556,40 @@ public class sintaxis {
                 }
             
             //integer 101, string 121, char 122, double
-            if(p.token == 101){
-                compararTipo2("integer");
-                
-            }
+            
             if(p.token == 121){
                 compararTipo2("string");
                 variableconcatenadas +=  "@impreso"+ contador + " DB  " + p.lexema + ", '$'\n";
                // nodoImpresion = new nodoImpreso( "@impreso" + contador, p.lexema);
-                        nodoImpreso aux = nodoImpresion;
-                            aux.setVariableImpreso(p.lexema);
-
+                nodoImpreso newnodo = new nodoImpreso("@impreso"+ contador, p.lexema);
+                arrayImpreso.add(newnodo);
+                
+                //  Comienza la concatenacion
+                //  Guardamos el primer impreso de nuestra concatenacion
+                if( f.lexema.equals("+ ") && conca1 == false){
+                    code += "CONCATENAR @impreso" + contador + ", ";
+                    conca1 = true;
+                }else if(f.lexema.equals("+ ") && conca2 == false){
+                    code += "@impreso" + contador + ", $1 \n";
+                    conca2 = true;
+                }else if(f.lexema.equals("+ ")){
+                    code += "CONCATENAR $1,  @impreso" + contador + ",  $1 \n";
+                }else if(f.lexema.equals(";") && conca1 == true){ 
+                    //  Guardamos la ultima cadena de nuestra concatenacion
+                    //  Y tambien asignamos toda la concatenacion
+                    if(conca2 == false){
+                        code += "@impreso" + contador + ", $1 \n";
+                        code += "MOV AX, $1 \n S_ASIGNAR " + variable + ", AX \n\n";
+                    }else{
+                        code += "CONCATENAR $1, @impreso" + contador + ", $1 \n MOV AX, $1 \n S_ASIGNAR " + variable + ", AX \n\n";
+                        concate = true;
+                    }
+                    
+                    conca1 = false;
+                    conca2 = false;
+                }
+                
+                //Fin concatenacion
                 contador++;
                 
                 if(f.token==103||f.token==104||f.token==105){
@@ -529,9 +600,122 @@ public class sintaxis {
             if(p.token == 122){
                 compararTipo2("char");
             }
+            
+            
+            if((CompTipo.equals("integer") || CompTipo.equals("double")) && (f.lexema.equals("+ ") || f.lexema.equals("- ") || f.lexema.equals("*") || f.lexema.equals("/"))){
+                codigoExpresion += p.lexema + " ";
+                codigoExpresion += f.lexema + " ";
+                expresion = true;
+                expresion2 = true;
+            }else if(p.lexema.equals("(")){
+                codigoExpresion += p.lexema + " ";
+                gop();
+                codigoExpresion += p.lexema + " ";
+                if (!f.lexema.equals(";"))
+                {
+                    codigoExpresion += f.lexema + " ";
+                }
+            }else if(expresion){
+                codigoExpresion += p.lexema + " ";
+                if(!f.lexema.equals(";"))
+                {
+                    if(f.lexema.equals(")"))
+                    {
+                        codigoExpresion += f.lexema + " ";
+                        gop();
+                    }
+                    codigoExpresion += f.lexema + " ";
+                }
+                if (CompTipo.equals("integer") && f.lexema.equals(";")){
+                    expresion = false;
+                    CALCULADORA_POSTFIJO();
+                    String var1 = "";
+                    String var2 = "";
+                    int impresoPolaca = 0;
+                    String varTemporal = "";
+
+                    for (int i = 0; i < array_postfijo.size(); i++)
+                    {
+                        if (array_postfijo.get(i).equals("+") || array_postfijo.get(i).equals("-") || array_postfijo.get(i).equals("/") || array_postfijo.get(i).equals("*"))
+                        {
+                            var1 = array_postfijo.get(i - 2);
+                            var2 = array_postfijo.get(i - 1);
+
+                            if(array_postfijo.get(i).equals("+"))
+                            {
+                                //SUMAR x, y,$1
+                                code += "SUMAR " + var1 + ", " + var2 + ", $" + impresoPolaca + "\n";
+
+                            }
+                            else if (array_postfijo.get(i).equals("-"))
+                            {
+                                //RESTA x, y,$1
+                                code += "RESTA " + var1 + ", " + var2 + ", $" + impresoPolaca + "\n";
+
+                            }
+                            else if (array_postfijo.get(i).equals("/"))
+                            {
+                                //DIVIDE x, y,$1
+                                code += "DIVIDE " + var1 + ", " + var2 + ", $" + impresoPolaca + "\n";
+
+                            }
+                            else if (array_postfijo.get(i).equals("*"))
+                            {
+                                //MULTI x, y,$1
+                                code += "MULTI " + var1 + ", " + var2 + ", $" + impresoPolaca + "\n";
+                            }
+
+                            varTemporal = "$" + impresoPolaca;
+                            impresoPolaca++;
+                            array_postfijo.add(i + 1, varTemporal);
+                            array_postfijo.remove(i - 1);
+                            array_postfijo.remove(i - 1);
+                            array_postfijo.remove(i - 2);
+
+                            i = 0;
+
+                            if (array_postfijo.size() == 1)
+                            {
+                                code += "MOV AX, " + array_postfijo.get(i) + "\n I_ASIGNAR " + variable + ", AX \n\n";
+                                exp = true;
+                                break;
+                            }
+                        }
+                        //AL FINAL MOV AX, $1 I_ASIGNAR z, AX
+                    }
+                }
+            }
+            if(p.token == 101){
+                compararTipo2("integer");
+                if(expresion2 == false){
+                    code += "MOV AX, " + p.lexema + "\nI_ASIGNAR " + variable + " AX\n\n";
+                    
+                }
+            }
             if(p.token == 402){
                 compararTipo2("double");
-                
+                if(expresion2 == false){
+                    code += "MOV AX, " + p.lexema + "\nI_ASIGNAR " + variable + " AX\n\n";
+                }
+            }
+            if(p.token == 121 && conca1 == false && concate == false){
+                for(nodoImpreso aux : arrayImpreso){
+                    if(aux.lexema.equals(p.lexema)){
+                        impreso = aux.impreso1;
+                    }
+                }
+                if (impreso != null) {
+                    code += "S_ASIGNAR " + variable + ",  " + impreso + "\n\n" ;
+                }
+            }
+            
+            if (p.token==100) {
+                buscarTipo2(p.lexema);
+                if(CompTipo2.equals("integer")||CompTipo2.equals("double")){
+                    code += "MOV AX, " + p.lexema + "\nI_ASIGNAR " + variable + " AX\n\n";
+                }else if(CompTipo2.equals("string")||CompTipo2.equals("char")){
+                    code += "MOV AX, " + p.lexema + "\nS_ASIGNAR " + variable + " AX\n\n";
+                }
             }
             
             gop();
@@ -688,7 +872,7 @@ public class sintaxis {
                         }
                         aux = aux.sig;
                     }
-                        asignarValor(valorVariable, nombreVariable);
+                        //asignarValor(valorVariable, nombreVariable);
                 }else{
                     
                     if (revisarInicializacion(nombreVariable)== null) {
@@ -714,22 +898,20 @@ public class sintaxis {
     private void asignarValor(String dato,String nombreVariable){
         
         buscarTipo2(nombreVariable);
-        if(CompTipo2.equals("integer")|| CompTipo2.equals("double")){
+        if((CompTipo2.equals("integer")|| CompTipo2.equals("double")) && !exp ){
             code += "MOV  AX, " + dato + "\nI_ASIGNAR  " + nombreVariable + ", AX\n";
         } else if(CompTipo2.equals("string") || CompTipo2.equals("char")){
-            nodoImpreso aux = nodoImpresion;
-            while(aux !=null){
-                if (aux.lexema.equals(dato)) {
+            
+            for(nodoImpreso aux : arrayImpreso){
+                if(aux.lexema.equals(dato)){
                     impreso = aux.impreso1;
                 }
-                aux = aux.nextRight;
             }
             if (impreso != null) {
                 code += "S_ASIGNAR " + nombreVariable + ",  " + impreso + "\n " ;
             }
-
-            
         }
+        exp = false;
         
         nodo2 aux = nodoVariables;
         while(aux !=null){
@@ -739,8 +921,6 @@ public class sintaxis {
             }
             aux = aux.nextRight;
         }
-          
-          
     }
     private void buscarTipo(String nombreVariable){
         nodo2  aux = nodoVariables;
@@ -821,6 +1001,95 @@ public class sintaxis {
             System.out.println("Errore al escribir ");
       }
     }
+    
+    
+    private void CALCULADORA_POSTFIJO() {
+
+        //Depurar la expresion algebraica
+        String expr = depurar(codigoExpresion);
+        String[] arrayInfix = expr.split(" ");
+
+        //Declaración de las pilas
+        Stack < String > E = new Stack <  > (); //Pila entrada
+        Stack < String > P = new Stack <  > (); //Pila temporal para operadores
+        Stack < String > S = new Stack <  > (); //Pila salida
+
+        //Añadir el arreglo a la Pila de entrada (E)
+        for (int i = arrayInfix.length - 1; i >= 0; i--) {
+          E.push(arrayInfix[i]);
+        }
+
+        try {
+          //Algoritmo Infijo a Postfijo
+          while (!E.isEmpty()) {
+            switch (pref(E.peek())){
+              case 1:
+                P.push(E.pop());
+                break;
+              case 2:
+                while(!P.peek().equals("(")) {
+                  S.push(P.pop());
+                }
+                P.pop();
+                E.pop();
+                break;             
+              case 3:
+
+              case 4:
+                while(pref(P.peek()) >= pref(E.peek())) {
+                  S.push(P.pop());
+                }
+                P.push(E.pop());
+                break; 
+              case 5:
+                  P.push(E.pop());
+                  break;
+              default:
+                S.push(E.pop()); 
+            } 
+          }
+
+          //Eliminacion de `impurezas´ en la expresiones algebraicas
+          String postfix = S.toString().replaceAll("[\\]\\[,]", "");
+            for (int i = 0; i < S.size(); i++) {
+                array_postfijo.add(S.get(i));
+            }
+          
+          
+        }catch(Exception ex){ 
+          //try de los errores. 
+          System.out.println("Error en la expresión algebraica");
+          System.err.println(ex);
+        }
+      }//main
+
+      //Depurar expresión algebraica
+      private static String depurar(String s) {
+        s = s.replaceAll("\\s+", ""); //Elimina espacios en blanco
+        s = "(" + s + ")";
+        String simbols = "+-*/()^";
+        String str = "";
+
+        //Deja espacios entre operadores
+        for (int i = 0; i < s.length(); i++) {
+          if (simbols.contains("" + s.charAt(i))) {
+            str += " " + s.charAt(i) + " ";
+          }else str += s.charAt(i);
+        }
+        return str.replaceAll("\\s+", " ").trim();
+      }
+
+      //Jerarquia de los operadores
+      private static int pref(String op) {
+        int prf = 99;
+        if (op.equals("^")) prf = 5;
+        if (op.equals("*") || op.equals("/")) prf = 4;
+        if (op.equals("+") || op.equals("-")) prf = 3;
+        if (op.equals(")")) prf = 2;
+        if (op.equals("(")) prf = 1;
+        return prf;
+      }
+    
    
 
 }//class
