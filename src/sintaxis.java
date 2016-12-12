@@ -21,8 +21,16 @@ public class sintaxis {
     
     String tipo;
     String variable, variable2;
-    String variabledos;
+    String variabledos, varCondicion, condicionTipo;
+    int je_if = 0, je_while = 0, je_for = 0, jump_if = 0, jump_while = 0, jump_for = 0;
+    ArrayList<Integer> array_JE_IF = new ArrayList<Integer>();
+    ArrayList<Integer> array_JE_FOR = new ArrayList<Integer>();
+    ArrayList<Integer> array_JE_WHILE = new ArrayList<Integer>();
     
+    ArrayList<Integer> array_JUMP_IF = new ArrayList<Integer>();
+    ArrayList<Integer> array_JUMP_FOR = new ArrayList<Integer>();
+    ArrayList<Integer> array_JUMP_WHILE = new ArrayList<Integer>();
+
     String header;
     String body;
     String footer;
@@ -31,7 +39,7 @@ public class sintaxis {
     String codecomplete;
     Boolean conca1 = false;
     Boolean conca2 = false, concate = false;
-    Boolean expresion2 = false;
+    Boolean expresion2 = false, incrementoFor = false, primeraCondicion = false, segundaCondicion = false;
     
     String CompTipo2;
     int contador = 0;
@@ -45,7 +53,6 @@ public class sintaxis {
     //POLACA
     String codigoExpresion = "";
     Boolean expresion = false, exp = false;
-    
     ArrayList<String> array_postfijo = new ArrayList<String> ();
     
     sintaxis(nodo cabeza) {
@@ -237,14 +244,19 @@ public class sintaxis {
                gop();
                 
             }else{
-                numeroerror="505";
-                errorsintax();
-                System.out.println(" En el renglon "+p.renglon);
-                System.exit(0);
+               if(incrementoFor == true){
+                   incrementoFor = false;
+               }else{
+                   numeroerror="505";
+                    errorsintax();
+                    System.out.println(" En el renglon "+p.renglon);
+                    System.exit(0); 
+               }
+               
             } 
            //block();
        }else{
-           if(p.token==206){
+           if(p.token==206){ // IF()
                
                gop();
                
@@ -265,8 +277,9 @@ public class sintaxis {
                 if(p.token == 122){
                     CompTipo = "char";
                 }
+                condicionTipo = "IF";
                expression();
-               if(p.token==208){
+               if(p.token==208){ //THEN
                    gop();
                }else{
                     numeroerror="511";
@@ -274,7 +287,7 @@ public class sintaxis {
                     System.out.println(" En el renglon "+p.renglon);
                     System.exit(0);
                }
-               if(p.token==201){
+               if(p.token==201){ //BEGIN
                    gop();
                    command();
                    block();
@@ -519,10 +532,55 @@ public class sintaxis {
                                 System.exit(0);
                            }
                        }else{
-                            numeroerror="521";
-                            errorsintax();
-                            System.out.println(" prueba En el renglon "+p.renglon+ numeroerror);
-                            System.exit(0);
+                           if(p.token==218){ //FOR
+                               gop();
+                               if(p.token==118){ // (
+                                   gop();
+                                   variabledeclare();
+                                   // Condicion apartir de aqui
+                                   buscarTipo(p.lexema);
+                                   expression();
+                                   // se acaba condicion
+                                   if(p.token==116){ // ;
+                                       gop();
+                                       incrementoFor = true;
+                                       command();
+                                       if(p.token==119){ // )
+                                            gop();
+                                           if(p.token==201){ // begind
+                                             gop();
+                                             block();
+                                             if(p.token==205){ // end
+                                                 gop();
+                                             }else{
+                                             numeroerror="520";
+                                             errorsintax();
+                                             System.out.println(" prueba En el renglon "+p.renglon+ numeroerror);
+                                             System.exit(0);
+                                             }
+                                             }else{
+                                                 numeroerror="519";
+                                                  errorsintax();
+                                                  System.out.println(" prueba En el renglon "+p.renglon+ numeroerror);
+                                                  System.exit(0);
+                                             }
+                                        }
+                                        else{
+
+                                       }
+                                   }else{
+                                   
+                                   }
+                               
+                               }else{
+                               
+                               }
+                           }else{
+                               numeroerror="521";
+                                errorsintax();
+                                System.out.println(" prueba En el renglon "+p.renglon+ numeroerror);
+                                System.exit(0);
+                           }
                        }
                    }
                }
@@ -534,6 +592,7 @@ public class sintaxis {
         
     }//ok
     private void secundaryexpression() {
+        primeraCondicion = true;
         primaryexpression();
         if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||
                 p.token==108||p.token==109||p.token==110||p.token==111||
@@ -546,6 +605,13 @@ public class sintaxis {
                 p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
            p.token==112||p.token==113||p.token==114||p.token==118||p.token == 402){
             variabledos = p.lexema;
+            if(primeraCondicion == true){
+                varCondicion = p.lexema;
+                primeraCondicion = false;
+            }else if(segundaCondicion == true){
+                varCondicion = p.lexema;
+                segundaCondicion = false;
+            }
             if (p.token==100) {
                 variablecomp();
                 compararTipo(p.lexema);
@@ -556,7 +622,7 @@ public class sintaxis {
                 }
             
             //integer 101, string 121, char 122, double
-            
+            //concatenacion
             if(p.token == 121){
                 compararTipo2("string");
                 variableconcatenadas +=  "@impreso"+ contador + " DB  " + p.lexema + ", '$'\n";
@@ -601,7 +667,11 @@ public class sintaxis {
                 compararTipo2("char");
             }
             
-            
+            //POLACA primero preguntamos si la variable es una entero o doble
+            //y también se pregunta si lo que sigue es un operador
+            //de eso modo se sabe qe es una expresion
+            //despues agregamos esa expresion a la variable codigoexpresion
+            //para que despues ya identificada, 
             if((CompTipo.equals("integer") || CompTipo.equals("double")) && (f.lexema.equals("+ ") || f.lexema.equals("- ") || f.lexema.equals("*") || f.lexema.equals("/"))){
                 codigoExpresion += p.lexema + " ";
                 codigoExpresion += f.lexema + " ";
@@ -755,8 +825,30 @@ public class sintaxis {
            p.token==112||p.token==113||p.token==114){
           
             gop();
-        
+            if(p.token == 106){ // >
+                code += "I_MAYOR " + varCondicion + ",";
+            }else if(p.token == 107){ // <
+                code += "I_MENOR " + varCondicion + ",";
+            }else if(p.token == 108){ // = 
+                code += "I_IGUAL " + varCondicion + ",";
+            }else if(p.token == 109){ // <=
+                code += "I_MENORIGUAL " + varCondicion + ",";
+            }else if(p.token == 110){ // >= 
+                code += "I_MAYORIGUAL " + varCondicion + ",";
+            }else if(p.token == 111){ // \=
+                code += "I_DIFERENTES " + varCondicion + ",";
+            }
+            segundaCondicion = true;
             primaryexpression();
+            code += varCondicion + ", $1\n";
+            code += "MOV AX, $1\n";
+            code += "CMP AX, 0\n";
+            
+            if(condicionTipo.equals("IF")){
+                code += "JE IF" + je_if + "\n\n";
+                array_JE_IF.add(je_if);
+                je_if++;
+            }
             secundaryexpression2();
         }
         
@@ -792,6 +884,7 @@ public class sintaxis {
             }
         }
     }//ok
+    
     private void gop(){
         if(p.sig==null){
             numeroerror="518";
@@ -812,7 +905,6 @@ public class sintaxis {
                     lex = p.lexema;
                 }
     }
-    
     private void variablecomp() {
          if(arreglovariables.contains(p.lexema)){
              
@@ -1002,7 +1094,6 @@ public class sintaxis {
       }
     }
     
-    
     private void CALCULADORA_POSTFIJO() {
 
         //Depurar la expresion algebraica
@@ -1062,7 +1153,6 @@ public class sintaxis {
           System.err.println(ex);
         }
       }//main
-
       //Depurar expresión algebraica
       private static String depurar(String s) {
         s = s.replaceAll("\\s+", ""); //Elimina espacios en blanco

@@ -1,19 +1,17 @@
-let 
+let
+var a : integer;
+var b : integer;
+in
+a:= 1;
+b:=2;
 
-var k: string;
-var i: string;
-var x: integer;
-var y: integer;
-var z: integer;
-in 
-x :=3;
-y := x;
-i := "sd" + "hola" + "jaja";
-k := "sd";
-i := "sd" + "hola" + "jaja";
-k := "sd";
-x ++ ;
-y -- ;
-
+if a <= b then begin
+b:= 3;
 end
-end    
+
+!for(var x: integer; a<z ; a++ ) begin
+ !   a := 5;
+  !  z := 20;
+!end
+
+end  
