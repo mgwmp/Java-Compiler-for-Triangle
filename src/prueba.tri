@@ -1,17 +1,18 @@
 let
 var a : integer;
 var b : integer;
+var c : integer;
+var z : integer;
 in
 a:= 1;
 b:=2;
+c := 0;
 
-if a <= b then begin
-b:= 3;
-end 
 
-!for(var x: integer; a<z ; a++ ) begin
- !   a := 5;
-  !  z := 20;
-!end
+
+for(var x: integer; a<z ; a++ ) begin
+    a := 5;
+    z := 20;
+end
 
 end  

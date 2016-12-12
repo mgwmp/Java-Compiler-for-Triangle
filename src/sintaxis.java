@@ -35,7 +35,7 @@ public class sintaxis {
     String body;
     String footer;
     String code ="";
-    String variableconcatenadas = "";
+    String variableconcatenadas = "", codigoFor;
     String codecomplete;
     Boolean conca1 = false;
     Boolean conca2 = false, concate = false;
@@ -207,9 +207,19 @@ public class sintaxis {
             gop();
             if(p.token == 403 || p.token == 404){
                 if(p.lexema.equals("+")){
-                    code = code + ("SUMAR " + variable2 + ", 1, $1\nMOV AX, $1\nI_ASIGNAR " + variable2 + ",  AX\n\n");
+                    if(incrementoFor == true){
+                        codigoFor = ("SUMAR " + variable2 + ", 1, $1\nMOV AX, $1\nI_ASIGNAR " + variable2 + ",  AX\n\n");
+                    }else{
+                        code = code + ("SUMAR " + variable2 + ", 1, $1\nMOV AX, $1\nI_ASIGNAR " + variable2 + ",  AX\n\n");
+                    }
+                    
                 }else if(p.lexema.equals("-")){
-                    code = code + "RESTAR " + variable2 + ", 1, $1\nMOV AX, $1\nI_ASIGNAR " + variable2 + ",  AX\n\n";
+                    if(incrementoFor == true){
+                        codigoFor = "RESTAR " + variable2 + ", 1, $1\nMOV AX, $1\nI_ASIGNAR " + variable2 + ",  AX\n\n";
+                    }else{
+                        code = code + "RESTAR " + variable2 + ", 1, $1\nMOV AX, $1\nI_ASIGNAR " + variable2 + ",  AX\n\n";
+                    }
+                    
                 }
                 gop();
                 if (p.token == 116/*;*/) {
@@ -352,7 +362,7 @@ public class sintaxis {
                    }
                }
            }else{
-               if(p.token==202){
+               if(p.token==202){ //while
                     gop();
                     if (p.token==100) {
                         variablecomp();
@@ -367,9 +377,12 @@ public class sintaxis {
                     if(p.token == 122){
                         CompTipo = "char";
                     }
-                    
+                    code += "WHILE" + jump_while + ":\n";
+                    array_JUMP_WHILE.add(jump_while);
+                    jump_while++;
+                    condicionTipo = "WHILE";
                    expression();
-                   if(p.token==203){
+                   if(p.token==203){ // DO
                        gop();
                    }else{
                         numeroerror="512";
@@ -377,9 +390,15 @@ public class sintaxis {
                         System.out.println(" En el renglon "+p.renglon);
                         System.exit(0);
                    }
-                   if(p.token==201){
+                   if(p.token==201){ // BEGIN
                        gop();
                        command();
+                       
+                        code += "JUMP WHILE" + (array_JUMP_WHILE.size()-1) + "\n";
+                        array_JUMP_WHILE.remove(array_JUMP_WHILE.size() - 1);
+                        
+                        
+                       
                        block();
                        if(p.token==205 && p.sig==null){
                             numeroerror="520";
@@ -388,7 +407,11 @@ public class sintaxis {
                             System.exit(0);
                         }
                        //block();
-                       if(p.token==205){
+                       if(p.token==205){ // END
+                           
+                           code += "END_WHILE" + (array_JE_WHILE.size()-1) + ":\n";
+                           array_JE_WHILE.remove(array_JE_WHILE.size() - 1);
+                           
                            gop();
                            if(p.token==205&&p.sig==null){
                                 numeroerror="520";
@@ -551,18 +574,32 @@ public class sintaxis {
                                    variabledeclare();
                                    // Condicion apartir de aqui
                                    buscarTipo(p.lexema);
+                                   
+                                    code += "FOR" + jump_for + ":\n";
+                                    array_JUMP_FOR.add(jump_for);
+                                    jump_for++;
+                                   condicionTipo = "FOR";
                                    expression();
                                    // se acaba condicion
                                    if(p.token==116){ // ;
                                        gop();
                                        incrementoFor = true;
                                        command();
+                                       
                                        if(p.token==119){ // )
                                             gop();
                                            if(p.token==201){ // begind
                                              gop();
                                              block();
+                                             
+                                             code += codigoFor;
+                                             
+                                             code += "JUMP FOR" + (array_JUMP_FOR.size()-1) + "\n";
+                                             array_JUMP_FOR.remove(array_JUMP_FOR.size() - 1);
+                                             
                                              if(p.token==205){ // end
+                                                 code += "END_FOR" + (array_JE_FOR.size()-1) + ":\n";
+                                                 array_JE_FOR.remove(array_JE_FOR.size() - 1);
                                                  gop();
                                              }else{
                                              numeroerror="520";
@@ -793,7 +830,7 @@ public class sintaxis {
             
             if (p.token==100) {
                 buscarTipo2(p.lexema);
-                if((CompTipo2.equals("integer")||CompTipo2.equals("double")) && !condicionTipo.equals("IF")){
+                if((CompTipo2.equals("integer")||CompTipo2.equals("double")) && !condicionTipo.equals("IF") && !condicionTipo.equals("WHILE") && !condicionTipo.equals("FOR")){
                     code += "MOV AX, " + p.lexema + "\nI_ASIGNAR " + variable + " AX\n\n";
                 }else if(CompTipo2.equals("string")||CompTipo2.equals("char")){
                     code += "MOV AX, " + p.lexema + "\nS_ASIGNAR " + variable + " AX\n\n";
@@ -862,11 +899,11 @@ public class sintaxis {
                 array_JE_IF.add(je_if);
                 je_if++;
             }else if(condicionTipo.equals("FOR")){
-                code += "JE FOR" + je_for + "\n\n";
+                code += "JE END_FOR" + je_for + "\n\n";
                 array_JE_FOR.add(je_for);
                 je_for++;
             }else if(condicionTipo.equals("WHILE")){
-                code += "JE WHILE" + je_while + "\n\n";
+                code += "JE END_WHILE" + je_while + "\n\n";
                 array_JE_WHILE.add(je_while);
                 je_while++;
             }
