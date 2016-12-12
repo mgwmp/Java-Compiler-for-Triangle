@@ -175,7 +175,7 @@ public class sintaxis {
         }
     }//ok
     private void block() {
-         if(p.token==100||p.token==206||p.token==202||p.token==213||p.token==212 || p.token==218){
+         if(p.token==100||p.token==206||p.token==202||p.token==204||p.token==213||p.token==212 || p.token==218){
             command();
          }
          if(p.token==100||p.token==206||p.token==202||p.token==213||p.token==212|| p.token==218){
@@ -290,7 +290,19 @@ public class sintaxis {
                if(p.token==201){ //BEGIN
                    gop();
                    command();
+                   //final del IF
+                   code += "JUMP IF" + jump_if + "\n";
+                   array_JUMP_IF.add(jump_if);
+                   jump_if++;
+                   
+                   code += "ELSE" + (array_JE_IF.size()-1)  + ":\n\n";
+                   array_JE_IF.remove(array_JE_IF.size() - 1);
+                   
+                   //aqui puede llegar un ELSE
                    block();
+                   code += "IF" + (array_JUMP_IF.size()-1) + ":\n\n";
+                   array_JUMP_IF.remove(array_JUMP_IF.size() - 1);
+                   
                    if(p.token==205&&p.sig==null){
                         numeroerror="520";
                         errorsintax();
@@ -781,7 +793,7 @@ public class sintaxis {
             
             if (p.token==100) {
                 buscarTipo2(p.lexema);
-                if(CompTipo2.equals("integer")||CompTipo2.equals("double")){
+                if((CompTipo2.equals("integer")||CompTipo2.equals("double")) && !condicionTipo.equals("IF")){
                     code += "MOV AX, " + p.lexema + "\nI_ASIGNAR " + variable + " AX\n\n";
                 }else if(CompTipo2.equals("string")||CompTipo2.equals("char")){
                     code += "MOV AX, " + p.lexema + "\nS_ASIGNAR " + variable + " AX\n\n";
@@ -824,7 +836,7 @@ public class sintaxis {
         if(p.token==102||p.token==103||p.token==104||p.token==105||p.token==106||p.token==107||p.token==108||p.token==109||p.token==110||p.token==111||
            p.token==112||p.token==113||p.token==114){
           
-            gop();
+            
             if(p.token == 106){ // >
                 code += "I_MAYOR " + varCondicion + ",";
             }else if(p.token == 107){ // <
@@ -839,15 +851,24 @@ public class sintaxis {
                 code += "I_DIFERENTES " + varCondicion + ",";
             }
             segundaCondicion = true;
+            gop();
             primaryexpression();
             code += varCondicion + ", $1\n";
             code += "MOV AX, $1\n";
             code += "CMP AX, 0\n";
             
             if(condicionTipo.equals("IF")){
-                code += "JE IF" + je_if + "\n\n";
+                code += "JE ELSE" + je_if + "\n\n";
                 array_JE_IF.add(je_if);
                 je_if++;
+            }else if(condicionTipo.equals("FOR")){
+                code += "JE FOR" + je_for + "\n\n";
+                array_JE_FOR.add(je_for);
+                je_for++;
+            }else if(condicionTipo.equals("WHILE")){
+                code += "JE WHILE" + je_while + "\n\n";
+                array_JE_WHILE.add(je_while);
+                je_while++;
             }
             secundaryexpression2();
         }
