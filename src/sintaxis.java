@@ -310,8 +310,7 @@ public class sintaxis {
                    
                    //aqui puede llegar un ELSE
                    block();
-                   code += "IF" + (array_JUMP_IF.size()-1) + ":\n\n";
-                   array_JUMP_IF.remove(array_JUMP_IF.size() - 1);
+                   
                    
                    if(p.token==205&&p.sig==null){
                         numeroerror="520";
@@ -326,6 +325,7 @@ public class sintaxis {
                     System.exit(0);
                }
                if(p.token==205){
+                   
                    gop();
                    
                }else{
@@ -347,6 +347,8 @@ public class sintaxis {
                             System.exit(0);
                        }
                        if(p.token==205){
+                           code += "IF" + (array_JUMP_IF.size()-1) + ":\n\n";
+                          array_JUMP_IF.remove(array_JUMP_IF.size() - 1);
                            gop();
                        }else{
                            numeroerror="520";

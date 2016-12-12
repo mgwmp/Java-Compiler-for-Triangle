@@ -8,6 +8,17 @@ a:= 1;
 b:=2;
 c := 0;
 
+if a <= b then begin
+b:= 3;
+end 
+else begin
+a:=6;
+end
+
+
+while a < b do begin
+c := 4;
+end
 
 
 for(var x: integer; a<z ; a++ ) begin
