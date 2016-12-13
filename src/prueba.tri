@@ -12,7 +12,7 @@ c := 0;
 
 if a <= b then begin
     if c <= b then begin
-        b:= 3;
+        b:= 5;
     end 
 end 
 else begin

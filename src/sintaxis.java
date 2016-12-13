@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Stack;
 import static java.lang.Character.isDigit;
+
 public class sintaxis {
     public lexico lexicomain = new lexico();//creación del objeto lista
     nodo p;
@@ -21,9 +22,9 @@ public class sintaxis {
     
     String tipo;
     String variable, variable2;
-    
+    String variabledos;
     //Esto pertenece a los ciclos
-    String variabledos, varCondicion, condicionTipo;
+    String  varCondicion, condicionTipo;
     int je_if = 0, je_while = 0, je_for = 0, jump_if = 0, jump_while = 0, jump_for = 0;
    
     ArrayList<Integer> array_JE_IF = new ArrayList<Integer>();
@@ -299,7 +300,7 @@ public class sintaxis {
                     System.out.println(" En el renglon "+p.renglon);
                     System.exit(0);
                }
-               if(p.token==201){ //BEGIN
+               if(p.token==201){ //BEGIN {
                    gop();
                    command();
                    //final del IF
@@ -314,9 +315,7 @@ public class sintaxis {
                    
                    //aqui puede llegar un ELSE
                    block();
-                   
-                   
-                   if(p.token==205&&p.sig==null){
+                        if(p.token==205&&p.sig==null){
                         numeroerror="520";
                         errorsintax();
                         System.out.println("  En el renglon "+p.renglon);
@@ -352,8 +351,7 @@ public class sintaxis {
                        }
                        //Aqui entra el ELSE
                        if(p.token==205){ //end
-                          /*code += "IF" + (array_JUMP_IF.size()-1) + ":\n\n";
-                          array_JUMP_IF.remove(array_JUMP_IF.size() - 1);*/
+
                            gop();
                        }else{
                            numeroerror="520";
@@ -370,10 +368,11 @@ public class sintaxis {
                }
                 //Aqui se obtiene el ultimo valor que se agregó  
                 //el ultimo que llegue es el primero que sale
-               code += "IF" + (array_JUMP_IF.get(array_JUMP_IF.size()-1)) + ":\n\n";
+               //RECORDAR IF!
+                code += "IF" + (array_JUMP_IF.get(array_JUMP_IF.size()-1)) + ":\n\n";
                           array_JUMP_IF.remove(array_JUMP_IF.size() - 1);
            }else{
-               if(p.token==202){ //while
+               if(p.token==202){ //WHILE!!!!
                     gop();
                     if (p.token==100) {
                         variablecomp();
@@ -578,7 +577,7 @@ public class sintaxis {
                                 System.exit(0);
                            }
                        }else{
-                           if(p.token==218){ //FOR
+                           if(p.token==218){ //AQUI ES EL FOR
                                gop();
                                if(p.token==118){ // (
                                    gop();
