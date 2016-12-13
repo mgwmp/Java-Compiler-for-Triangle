@@ -21,8 +21,11 @@ public class sintaxis {
     
     String tipo;
     String variable, variable2;
+    
+    //Esto pertenece a los ciclos
     String variabledos, varCondicion, condicionTipo;
     int je_if = 0, je_while = 0, je_for = 0, jump_if = 0, jump_while = 0, jump_for = 0;
+   
     ArrayList<Integer> array_JE_IF = new ArrayList<Integer>();
     ArrayList<Integer> array_JE_FOR = new ArrayList<Integer>();
     ArrayList<Integer> array_JE_WHILE = new ArrayList<Integer>();
@@ -30,7 +33,8 @@ public class sintaxis {
     ArrayList<Integer> array_JUMP_IF = new ArrayList<Integer>();
     ArrayList<Integer> array_JUMP_FOR = new ArrayList<Integer>();
     ArrayList<Integer> array_JUMP_WHILE = new ArrayList<Integer>();
-
+    //hasta aqui son los ciclos.
+    
     String header;
     String body;
     String footer;
@@ -266,10 +270,8 @@ public class sintaxis {
             } 
            //block();
        }else{
-           if(p.token==206){ // IF()
-               
+           if(p.token==206){ // IF()               
                gop();
-               
                 if (p.token==100) {
                     variablecomp();
                     buscarTipo(p.lexema);
@@ -301,11 +303,13 @@ public class sintaxis {
                    gop();
                    command();
                    //final del IF
+                   //Se hace el salto 
+                   
                    code += "JUMP IF" + jump_if + "\n";
                    array_JUMP_IF.add(jump_if);
                    jump_if++;
                    
-                   code += "ELSE" + (array_JE_IF.size()-1)  + ":\n\n";
+                   code += "ELSE" + (array_JE_IF.get(array_JE_IF.size()-1))  + ":\n\n";
                    array_JE_IF.remove(array_JE_IF.size() - 1);
                    
                    //aqui puede llegar un ELSE
@@ -334,9 +338,9 @@ public class sintaxis {
                     System.out.println("  En el renglon "+p.renglon);
                     System.exit(0);
                }
-               if(p.token==204){
+               if(p.token==204){ //else
                    gop();
-                   if(p.token==201){
+                   if(p.token==201){ //begin
                        gop();
                        command();
                        block();
@@ -346,9 +350,10 @@ public class sintaxis {
                             System.out.println("  En el renglon "+p.renglon);
                             System.exit(0);
                        }
-                       if(p.token==205){
-                           code += "IF" + (array_JUMP_IF.size()-1) + ":\n\n";
-                          array_JUMP_IF.remove(array_JUMP_IF.size() - 1);
+                       //Aqui entra el ELSE
+                       if(p.token==205){ //end
+                          /*code += "IF" + (array_JUMP_IF.size()-1) + ":\n\n";
+                          array_JUMP_IF.remove(array_JUMP_IF.size() - 1);*/
                            gop();
                        }else{
                            numeroerror="520";
@@ -363,6 +368,10 @@ public class sintaxis {
                         System.exit(0);
                    }
                }
+                //Aqui se obtiene el ultimo valor que se agregó  
+                //el ultimo que llegue es el primero que sale
+               code += "IF" + (array_JUMP_IF.get(array_JUMP_IF.size()-1)) + ":\n\n";
+                          array_JUMP_IF.remove(array_JUMP_IF.size() - 1);
            }else{
                if(p.token==202){ //while
                     gop();
@@ -411,7 +420,7 @@ public class sintaxis {
                        //block();
                        if(p.token==205){ // END
                            
-                           code += "END_WHILE" + (array_JE_WHILE.size()-1) + ":\n";
+                           code += "END_WHILE" + (array_JE_WHILE.get(array_JE_WHILE.size()-1)) + ":\n\n";
                            array_JE_WHILE.remove(array_JE_WHILE.size() - 1);
                            
                            gop();
@@ -600,7 +609,7 @@ public class sintaxis {
                                              array_JUMP_FOR.remove(array_JUMP_FOR.size() - 1);
                                              
                                              if(p.token==205){ // end
-                                                 code += "END_FOR" + (array_JE_FOR.size()-1) + ":\n";
+                                                 code += "END_FOR" + (array_JE_FOR.get(array_JE_FOR.size()-1)) + ":\n";
                                                  array_JE_FOR.remove(array_JE_FOR.size() - 1);
                                                  gop();
                                              }else{
@@ -944,7 +953,6 @@ public class sintaxis {
             }
         }
     }//ok
-    
     private void gop(){
         if(p.sig==null){
             numeroerror="518";
@@ -1083,7 +1091,6 @@ public class sintaxis {
             aux = aux.nextRight;
         }
     }
-    
     private void buscarTipo2(String nombreVariable){
         nodo2  aux = nodoVariables;
         while(aux != null){
@@ -1153,7 +1160,6 @@ public class sintaxis {
             System.out.println("Errore al escribir ");
       }
     }
-    
     private void CALCULADORA_POSTFIJO() {
 
         //Depurar la expresion algebraica
@@ -1228,7 +1234,6 @@ public class sintaxis {
         }
         return str.replaceAll("\\s+", " ").trim();
       }
-
       //Jerarquia de los operadores
       private static int pref(String op) {
         int prf = 99;
